@@ -1,0 +1,110 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.getkeepsafe.dexcount'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+def conf = rootProject.ext.config
+
+android {
+
+    compileSdkVersion conf.compileSdkVersion
+    buildToolsVersion conf.buildToolsVersion
+
+    defaultConfig {
+
+        applicationId conf.applicationId
+        versionCode conf.versionCode
+        versionName conf.versionName
+
+        minSdkVersion conf.minSdkVersion
+        targetSdkVersion conf.targetSdkVersion
+
+        testInstrumentationRunner conf.testInstrumentationRunner
+        vectorDrawables.useSupportLibrary true
+        multiDexEnabled true
+
+        def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+        buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
+
+        resValue "string", "mixpanel_key", "your_key_goes_here"
+
+        resValue "string", "weather_api_key", "your_key_goes_here"
+
+        def config = new Properties()
+        config.load(new FileInputStream(rootProject.file("config/secret.properties")))
+
+        resValue "string", "base_url", config.serverUrl
+    }
+
+    buildTypes {
+
+        debug {
+            debuggable true
+            applicationIdSuffix ".debug"
+            buildConfigField "String", "GIT_SHA", "\"DUMMY_GIT_SHA\""
+        }
+
+        release {
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+}
+
+androidExtensions {
+    experimental = true
+}
+
+dependencies {
+
+    implementation project(':domain')
+    implementation project(':data')
+
+    /* View */
+    compile 'com.android.support:appcompat-v7:27.0.2'
+    compile 'com.android.support:recyclerview-v7:27.0.2'
+    compile 'com.android.support:cardview-v7:27.0.2'
+    compile 'com.android.support:support-annotations:27.0.2'
+    compile 'com.android.support:design:27.0.2'
+    implementation("com.mikepenz:materialdrawer:6.0.2@aar") { transitive = true }
+
+    /* Core */
+    compile 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
+    compile 'com.google.dagger:dagger:2.12'
+    kapt 'com.google.dagger:dagger-compiler:2.12'
+    implementation 'androidx.core:core-ktx:0.1'
+
+    /* Debug */
+    compile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+
+    /* Analytics */
+    compile "com.mixpanel.android:mixpanel-android:5.1.4"
+
+    /* Various */
+    compile 'com.github.pwittchen:reactivenetwork-rx2:0.12.1'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    /* Testing */
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile 'org.mockito:mockito-core:2.0.17-beta'
+    androidTestCompile 'com.android.support.test:runner:1.0.1'
+
+    androidTestCompile 'com.google.dagger:dagger:2.12'
+    kaptTest 'com.google.dagger:dagger-compiler:2.12'
+    kaptAndroidTest 'com.google.dagger:dagger-compiler:2.12'
+
+    androidTestCompile 'com.android.support.test:rules:1.0.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
+
+}
+repositories {
+    mavenCentral()
+}

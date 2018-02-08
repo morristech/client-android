@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+  android:id="@+id/cl_main"
+  style="@style/MatchParent"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    app:layout_collapseMode="pin"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+  <LinearLayout
+    android:id="@+id/am_fl_btn"
+    style="@style/WrapContent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_anchorGravity="bottom|center_horizontal">
+    <Button
+      android:id="@+id/ai_btn_click_me"
+      style="@style/WrapContentH"
+      android:text="Click me motherfucker"/>
+  </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

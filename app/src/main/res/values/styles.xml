@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <!-- Base application theme. -->
+  <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">#3F51B5</item>
+    <item name="colorPrimaryDark">#3949AB</item>
+    <item name="colorAccent">#00B0FF</item>
+  </style>
+
+  <style name="AppThemeTranslucent" parent="AppTheme.Base">
+    <item name="android:windowTranslucentStatus">true</item>
+  </style>
+
+  <style name="ExpandedAppBarTitle" parent="@android:style/TextAppearance.Large">
+    <item name="android:textStyle">normal</item>
+    <item name="android:textColor">?attr/colorAccent</item>
+  </style>
+
+  <!-- Dimensions -->
+  <style name="MatchParent" parent="">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">match_parent</item>
+  </style>
+
+  <style name="WrapContent" parent="">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+  </style>
+
+  <style name="WrapContentW" parent="">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">match_parent</item>
+  </style>
+
+  <style name="WrapContentH" parent="">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+  </style>
+
+  <style name="WrapContent.CenterInParent" parent="WrapContent">
+    <item name="android:layout_centerHorizontal">true</item>
+  </style>
+
+  <style name="WrapContent.LayoutGravity.CenterHorizontal" parent="WrapContent">
+    <item name="android:layout_gravity">center_horizontal</item>
+  </style>
+
+  <style name="WrapContent.CenterVertical" parent="WrapContent">
+    <item name="android:layout_centerHorizontal">true</item>
+  </style>
+
+
+  <!-- Layouts-->
+  <style name="LinearL.Vertical.WrapContent" parent="WrapContent">
+    <item name="android:orientation">vertical</item>
+  </style>
+
+  <style name="LinearL.Horizontal.WrapContent" parent="WrapContent">
+    <item name="android:orientation">horizontal</item>
+  </style>
+
+  <style name="LinearL.Vertical.MatchParent" parent="MatchParent">
+    <item name="android:orientation">vertical</item>
+  </style>
+
+  <style name="LinearL.Horizontal.MatchParent" parent="MatchParent">
+    <item name="android:orientation">horizontal</item>
+  </style>
+
+  <style name="LinearL.Vertical.WrapContentH" parent="WrapContentH">
+    <item name="android:orientation">vertical</item>
+  </style>
+
+  <style name="LinearL.Horizontal.WrapContentH" parent="WrapContentH">
+    <item name="android:orientation">horizontal</item>
+  </style>
+
+</resources>

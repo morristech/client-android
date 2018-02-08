@@ -1,0 +1,7 @@
+<resources>
+  <string name="app_name">CG 2</string>
+
+  <string name="drawer_item_cocktails">Cocktails</string>
+  <string name="drawer_item_ingredients">Ingredients</string>
+  <string name="drawer_item_academy">Academy</string>
+</resources>

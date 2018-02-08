@@ -1,0 +1,12 @@
+ext {
+    config = [
+            package                  : "com.guru.cocktails",
+            buildToolsVersion        : "26.0.2",
+            compileSdkVersion        : 26,
+            minSdkVersion            : 24,
+            targetSdkVersion         : 25,
+            versionCode              : 1,
+            versionName              : "1.0",
+            testInstrumentationRunner: "com.guru.cocktails.MockAppTestRunner"
+    ]
+}
