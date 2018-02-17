@@ -5,13 +5,6 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    app:layout_collapseMode="pin"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
   <FrameLayout
     android:id="@+id/am_fl_btn"
     style="@style/WrapContent"
@@ -19,5 +12,16 @@
     android:layout_height="wrap_content"
     app:layout_anchorGravity="bottom|center_horizontal">
   </FrameLayout>
+
+  <android.support.design.widget.BottomNavigationView
+    android:id="@+id/navigation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_gravity="bottom"
+    android:background="@android:color/white"
+    app:itemIconTint="@drawable/color_state_primary"
+    app:itemTextColor="@drawable/color_state_primary"
+    app:menu="@menu/menu_bottom_navigation_basic" />
 
 </android.support.design.widget.CoordinatorLayout>

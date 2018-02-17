@@ -9,13 +9,14 @@ import com.guru.cocktails.App
 import com.guru.cocktails.R
 import com.guru.cocktails.di.component.DaggerViewComponent
 import com.guru.cocktails.di.module.PresenterModule
+import com.guru.cocktails.domain.model.IngredientThumb
 import com.guru.cocktails.ui.base.BaseActivity
-import com.guru.cocktails.ui.cocktails.CocktailViewModel
 import com.guru.cocktails.ui.description.DescriptionActivity
+import com.guru.cocktails.ui.ingredients.IngredientsAdapter
 import kotlinx.android.synthetic.main.activity_ingredient.*
 import javax.inject.Inject
 
-class IngredientActivity : BaseActivity(), IngredientContract.View {
+class IngredientActivity : BaseActivity(), IngredientContract.View, IngredientsAdapter.Callbacks {
 
     private var presenter: IngredientContract.Presenter? = null
 
@@ -34,25 +35,25 @@ class IngredientActivity : BaseActivity(), IngredientContract.View {
         collapsing_toolbar.title = "White rum"
 
         val cocktails = listOf(
-            CocktailViewModel(1L, "1"),
-            CocktailViewModel(1L, "2"),
-            CocktailViewModel(1L, "3"),
-            CocktailViewModel(1L, "4"),
-            CocktailViewModel(1L, "1"),
-            CocktailViewModel(1L, "2"),
-            CocktailViewModel(1L, "3"),
-            CocktailViewModel(1L, "4")
+            IngredientThumb(1, "1","1",1.0),
+            IngredientThumb(1, "1","1",1.0),
+            IngredientThumb(1, "1","1",1.0),
+            IngredientThumb(1, "1","1",1.0),
+            IngredientThumb(1, "1","1",1.0),
+            IngredientThumb(1, "1","1",1.0),
+            IngredientThumb(1, "1","1",1.0),
+            IngredientThumb(1, "1","1",1.0)
         )
 
         val manager = GridLayoutManager(this, 2)
-        val adapterAbc = CocktailsAdapter()
+        val adapterAbc = IngredientsAdapter(this)
         adapterAbc.updateData(cocktails)
         ai_rv.layoutManager = manager
         ai_rv.adapter = adapterAbc
         ai_rv.isNestedScrollingEnabled = false
 
         ai_ll_description.setOnClickListener {
-            val pairs = listOf(Pair(place_detail as View, "description"),Pair(image as View, "image"))
+            val pairs = listOf(Pair(place_detail as View, "description"), Pair(image as View, "image"))
             val bundle = DescriptionActivity.newBundle("White Rummmmmmmmmmmmm", "Much is made of the word's two spellings: whiskey and whisky.[3][4] There are two schools of thought on the issue. One is that the spelling difference is simply a matter of regional language convention for the spelling of a word, indicating that the spelling varies depending on the intended audience or the background or personal preferences of the writer (like the difference between color and colour; or recognize and recognise),[3][4] and the other is that the spelling should depend on the style or origin of the spirit being described. There is general agreement that when quoting the proper name printed on a label, the spelling on the label should not be altered.[3][4] Some writers[who?] refer to \"whisk(e)y\" or \"whisky/whiskey\" to acknowledge the variation.,Much is made of the word's two spellings: whiskey and whisky.[3][4] There are two schools of thought on the issue. One is that the spelling difference is simply a matter of regional language convention for the spelling of a word, indicating that the spelling varies depending on the intended audience or the background or personal preferences of the writer (like the difference between color and colour; or recognize and recognise),[3][4] and the other is that the spelling should depend on the style or origin of the spirit being described. There is general agreement that when quoting the proper name printed on a label, the spelling on the label should not be altered.[3][4] Some writers[who?] refer to \"whisk(e)y\" or \"whisky/whiskey\" to acknowledge the variation.,Much is made of the word's two spellings: whiskey and whisky.[3][4] There are two schools of thought on the issue. One is that the spelling difference is simply a matter of regional language convention for the spelling of a word, indicating that the spelling varies depending on the intended audience or the background or personal preferences of the writer (like the difference between color and colour; or recognize and recognise),[3][4] and the other is that the spelling should depend on the style or origin of the spirit being described. There is general agreement that when quoting the proper name printed on a label, the spelling on the label should not be altered.[3][4] Some writers[who?] refer to \"whisk(e)y\" or \"whisky/whiskey\" to acknowledge the variation.,Much is made of the word's two spellings: whiskey and whisky.[3][4] There are two schools of thought on the issue. One is that the spelling difference is simply a matter of regional language convention for the spelling of a word, indicating that the spelling varies depending on the intended audience or the background or personal preferences of the writer (like the difference between color and colour; or recognize and recognise),[3][4] and the other is that the spelling should depend on the style or origin of the spirit being described. There is general agreement that when quoting the proper name printed on a label, the spelling on the label should not be altered.[3][4] Some writers[who?] refer to \"whisk(e)y\" or \"whisky/whiskey\" to acknowledge the variation.,Much is made of the word's two spellings: whiskey and whisky.[3][4] There are two schools of thought on the issue. One is that the spelling difference is simply a matter of regional language convention for the spelling of a word, indicating that the spelling varies depending on the intended audience or the background or personal preferences of the writer (like the difference between color and colour; or recognize and recognise),[3][4] and the other is that the spelling should depend on the style or origin of the spirit being described. There is general agreement that when quoting the proper name printed on a label, the spelling on the label should not be altered.[3][4] Some writers[who?] refer to \"whisk(e)y\" or \"whisky/whiskey\" to acknowledge the variation.")
             navigator.navigate(this, DescriptionActivity::class.java, bundle, pairs)
         }
@@ -75,5 +76,9 @@ class IngredientActivity : BaseActivity(), IngredientContract.View {
     override fun onDestroy() {
         presenter?.stop()
         super.onDestroy()
+    }
+
+    override fun onClick(item: IngredientThumb, sharedElements: List<Pair<View, String>>?) {
+
     }
 }

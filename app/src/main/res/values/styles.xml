@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
+
+  <!-- Base application theme. -->
+  <style name="AppThemeX" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+    <item name="windowActionModeOverlay">true</item>
+    <item name="android:actionModeBackground">@color/blue_grey_600</item>
+  </style>
+
+  <style name="AppThemeX.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+  <style name="Toolbar.Light" parent="@style/AppThemeX">
+    <item name="colorControlNormal">@color/grey_60</item>
+    <item name="android:textColorPrimary">@color/grey_60</item>
+  </style>
+
+  <style name="TextAppearance.Subhead.Bold" parent="@style/TextAppearance.AppCompat.Subhead">
+    <item name="android:textStyle">bold</item>
+  </style>
+
   <!-- Base application theme. -->
   <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
     <item name="colorPrimary">#3F51B5</item>

@@ -14,7 +14,6 @@ import com.guru.cocktails.platform.navigation.Navigator
 import com.guru.cocktails.ui.base.BaseActivity
 import com.guru.cocktails.ui.base.BaseFragment
 import com.guru.cocktails.ui.description.DescriptionActivity
-import com.guru.cocktails.ui.ingredients.IngredientsActivity
 import com.guru.cocktails.ui.shared.DrawerManager
 import dagger.Component
 import javax.inject.Singleton
@@ -31,7 +30,6 @@ interface ApplicationComponent {
     fun inject(item: BaseActivity)
     fun inject(item: BaseFragment)
     fun inject(item: DrawerManager)
-    fun inject(item: IngredientsActivity)
     fun inject(item: DescriptionActivity)
 
     /* exposing to other components [com.guru.cocktails.di.component.ViewComponent] */

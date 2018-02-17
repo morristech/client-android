@@ -24,8 +24,9 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_alignParentTop="true"
+        android:transitionName="image"
         android:scaleType="centerCrop"
-        android:src="@drawable/marga"/>
+        android:src="@drawable/captain"/>
 
       <LinearLayout
         android:id="@+id/text_container"

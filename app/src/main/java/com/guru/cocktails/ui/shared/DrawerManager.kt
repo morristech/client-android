@@ -3,13 +3,8 @@ package com.guru.cocktails.ui.shared
 import android.support.annotation.StringRes
 import android.support.v7.app.AppCompatActivity
 import com.guru.cocktails.App
-import com.guru.cocktails.R
 import com.guru.cocktails.platform.navigation.Navigator
-import com.guru.cocktails.ui.academy.AcademyActivity
 import com.guru.cocktails.ui.base.BaseActivity
-import com.guru.cocktails.ui.cocktails.CocktailsActivity
-import com.guru.cocktails.ui.ingredients.IngredientsActivity
-import com.guru.cocktails.ui.shared.DrawerItems.*
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
@@ -39,14 +34,14 @@ class DrawerManager(private val activity: BaseActivity, private val type: Drawer
             .withActionBarDrawerToggle(true)
 
         val newDrawer = drawerBuilder.build()
-
-        val cocktailsItem = buildPrimaryItem(type is Cocktails, getString(R.string.drawer_item_cocktails), { buildClickListener(Cocktails(), CocktailsActivity::class.java) })
-        val ingredientsItem = buildPrimaryItem(type is Ingredients, getString(R.string.drawer_item_ingredients), { buildClickListener(Ingredients(), IngredientsActivity::class.java) })
+/*
+        val cocktailsItem = buildPrimaryItem(type is Cocktails, getString(R.string.drawer_item_cocktails), { buildClickListener(Cocktails(), MainActivity::class.java) })
+        val ingredientsItem = buildPrimaryItem(type is Ingredients, getString(R.string.drawer_item_ingredients), { buildClickListener(Ingredients(), IngredientsHolderFragment::class.java) })
         val academyItem = buildPrimaryItem(type is Academy, getString(R.string.drawer_item_academy), { buildClickListener(Academy(), AcademyActivity::class.java) })
 
         newDrawer.addItem(cocktailsItem)
         newDrawer.addItem(ingredientsItem)
-        newDrawer.addItem(academyItem)
+        newDrawer.addItem(academyItem)*/
 
         return newDrawer
     }

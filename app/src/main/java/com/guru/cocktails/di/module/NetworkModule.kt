@@ -30,7 +30,7 @@ class NetworkModule {
     internal fun provideOkHttpClient(context: Context): OkHttpClient {
 
         val client = OkHttpClient.Builder()
-        client.addInterceptor(RequestInterceptor(context.getString(R.string.weather_api_key)))
+        client.addInterceptor(RequestInterceptor(context.getString(R.string.api_auth_user),context.getString(R.string.api_auth_key)))
 
         if (BuildConfig.DEBUG) {
 
@@ -84,7 +84,7 @@ class NetworkModule {
         client.hostnameVerifier { _, _ -> true }
 
         /* Rest of config*/
-        client.addInterceptor(RequestInterceptor(context.getString(R.string.weather_api_key)))
+        client.addInterceptor(RequestInterceptor(context.getString(R.string.api_auth_user),context.getString(R.string.api_auth_key)))
         client.addNetworkInterceptor(StethoInterceptor())
 
         val logInterceptor = HttpLoggingInterceptor()
