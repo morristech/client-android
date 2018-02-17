@@ -1,4 +1,4 @@
-package com.guru.cocktails.domain.model
+package com.guru.cocktails.domain.model.ingredient
 
 
 data class Ingredient(

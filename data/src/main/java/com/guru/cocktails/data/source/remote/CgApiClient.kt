@@ -1,7 +1,7 @@
 package com.guru.cocktails.data.source.remote
 
 import com.guru.cocktails.data.source.remote.model.WeatherDto
-import com.guru.cocktails.domain.model.IngredientThumb
+import com.guru.cocktails.domain.model.ingredient.IngredientThumb
 import com.guru.cocktails.domain.model.ListBundle
 import com.guru.cocktails.domain.model.ReqBody
 import io.reactivex.Single
