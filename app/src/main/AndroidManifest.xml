@@ -41,10 +41,6 @@
     </activity>
 
     <activity
-      android:name=".ui.ingredients.IngredientsHolderFragment"
-      android:theme="@style/Theme.AppCompat.Light"/>
-
-    <activity
       android:name=".ui.ingredient.IngredientActivity"
       android:theme="@style/AppThemeTranslucent"/>
 
