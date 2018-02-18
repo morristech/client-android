@@ -11,6 +11,7 @@ import com.guru.cocktails.platform.bus.event.EventBus
 import com.guru.cocktails.platform.connectivity.ConnectivityChecker
 import com.guru.cocktails.platform.extensions.lazyFast
 import com.guru.cocktails.platform.navigation.Navigator
+import com.squareup.picasso.Picasso
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 import javax.inject.Inject
@@ -24,15 +25,18 @@ abstract class BaseActivity : AppCompatActivity(), ConnectivityChecker.Callbacks
     @Inject lateinit var eventBus: EventBus
     @Inject lateinit var navigator: Navigator
     @Inject lateinit var analyticsManager: AnalyticsManager
+    @Inject lateinit var picasso: Picasso
 
     protected abstract fun inject()
     protected open fun afterLayout(savedInstanceState: Bundle?) {}
     protected open fun onViewsBound() {}
+    protected open fun extractArguments() {}
     @LayoutRes protected abstract fun layoutId(): Int
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inject()
+        extractArguments()
         setContentView(layoutId())
         afterLayout(savedInstanceState)
         onViewsBound()

@@ -1,4 +1,4 @@
-package com.cocktailsguru.android.platform.extensions
+package com.guru.cocktails.platform.extensions
 
 
 import android.support.v7.util.DiffUtil

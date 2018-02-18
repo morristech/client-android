@@ -14,27 +14,18 @@
     android:background="@android:color/white"
     android:theme="@style/AppThemeX.AppBarOverlay">
 
-    <android.support.v7.widget.Toolbar
-      android:id="@+id/toolbar"
-      android:layout_width="match_parent"
-      android:layout_height="?attr/actionBarSize"
-      android:visibility="gone"
-      app:contentInsetStartWithNavigation="0dp"
-      app:layout_scrollFlags="scroll|enterAlways"
-      app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-      app:theme="@style/Toolbar.Light"/>
-
     <android.support.design.widget.TabLayout
       android:id="@+id/tab_layout"
       android:layout_width="match_parent"
       android:layout_height="?attr/actionBarSize"
+      android:background="?attr/colorPrimary"
       app:tabGravity="fill"
-      app:tabIndicatorColor="@color/md_orange_500"
+      app:tabIndicatorColor="@color/font_white_100"
       app:tabIndicatorHeight="3dp"
-      app:tabMode="fixed"
-      app:tabSelectedTextColor="@color/md_orange_500"
+      app:tabMode="scrollable"
+      app:tabSelectedTextColor="@color/font_white_100"
       app:tabTextAppearance="@style/TextAppearance.Subhead.Bold"
-      app:tabTextColor="@color/grey_60"/>
+      app:tabTextColor="@color/font_white_70"/>
 
   </android.support.design.widget.AppBarLayout>
 

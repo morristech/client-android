@@ -1,16 +1,15 @@
 package com.guru.cocktails.data.source
 
-import com.guru.cocktails.data.source.remote.model.WeatherDto
-import com.guru.cocktails.data.source.remote.model.ingredientDto.IngredientDetailDto
-import com.guru.cocktails.domain.model.ingredient.IngredientThumb
+import com.guru.cocktails.data.source.remote.model.ingredient.IngredientDetailDto
+import com.guru.cocktails.data.source.remote.model.ingredient.IngredientThumbDto
 import com.guru.cocktails.domain.model.ListBundle
-import com.guru.cocktails.domain.model.ingredient.IngredientDetail
 import io.reactivex.Single
 
 interface RemoteSource {
-    fun getWeatherForCity(city: String): Single<WeatherDto>
 
-    fun getNonAlcoList(): Single<ListBundle<IngredientThumb>>
+    fun getAllAlcoholicIngredients(): Single<ListBundle<IngredientThumbDto>>
 
-    fun getIngredientDetail(ingredientId:Int): Single<IngredientDetailDto>
+    fun getAllNonAlcoholicIngredients(): Single<ListBundle<IngredientThumbDto>>
+
+    fun getIngredientDetail(ingredientId: Int): Single<IngredientDetailDto>
 }
