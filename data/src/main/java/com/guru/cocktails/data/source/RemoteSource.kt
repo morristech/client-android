@@ -12,5 +12,5 @@ interface RemoteSource {
 
     fun getNonAlcoList(): Single<ListBundle<IngredientThumb>>
 
-    fun getIngredientDetailForRemote(ingredientId:Int): Single<IngredientDetailDto>
+    fun getIngredientDetail(ingredientId:Int): Single<IngredientDetailDto>
 }

@@ -10,12 +10,17 @@ import javax.inject.Singleton
 @Singleton
 class IngredientTypeMapper @Inject constructor() : Mapper<IngredientType, IngredientTypeDto>() {
 
-    override fun map(from: IngredientTypeDto) = IngredientType(
-            id = from.id ?: invalidInt,
-            name = from.name ?: emptyString
-    )
+    override fun map(from: IngredientTypeDto) = with(from) {
+        IngredientType(
+                id = id ?: invalidInt,
+                name = name ?: emptyString
+        )
+    }
 
-    override fun reverse(to: IngredientType) = IngredientTypeDto(
-            to.id, to.name
-    )
+    override fun reverse(to: IngredientType) = with(to) {
+        IngredientTypeDto(
+                id = id,
+                name = name
+        )
+    }
 }

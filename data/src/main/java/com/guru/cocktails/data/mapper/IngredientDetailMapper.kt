@@ -12,23 +12,27 @@ class IngredientDetailMapper @Inject constructor(
         private val ingredientTypeMapper: IngredientTypeMapper
 ) : Mapper<IngredientDetail, IngredientDetailDto>() {
 
-    override fun map(from: IngredientDetailDto) = IngredientDetail(
-            id = from.id ?: invalidInt,
-            name = from.name ?: emptyString,
-            nameGrouped = from.nameGrouped ?: emptyString,
-            description = from.description ?: emptyString,
-            imageName = from.imageName ?: emptyString,
-            numShowed = from.numShowed ?: invalidInt,
-            ingredientType = ingredientTypeMapper.map(from.ingredientType?: IngredientTypeDto(invalidInt,emptyString)),
-            voltage = from.voltage ?: invalidInt)
+    override fun map(from: IngredientDetailDto) = with(from) {
+        IngredientDetail(
+                id = id ?: invalidInt,
+                name = name ?: emptyString,
+                nameGrouped = nameGrouped ?: emptyString,
+                description = description ?: emptyString,
+                imageName = imageName ?: emptyString,
+                numShowed = numShowed ?: invalidInt,
+                ingredientType = ingredientTypeMapper.map(ingredientType ?: IngredientTypeDto(invalidInt, emptyString)),
+                voltage = voltage ?: invalidInt)
+    }
 
-    override fun reverse(to: IngredientDetail) = IngredientDetailDto(
-            id = to.id,
-            name = to.name,
-            nameGrouped = to.nameGrouped,
-            description = to.description,
-            imageName = to.imageName,
-            numShowed = to.numShowed,
-            ingredientType = ingredientTypeMapper.reverse(to.ingredientType),
-            voltage = to.voltage)
+    override fun reverse(to: IngredientDetail) = with(to) {
+        IngredientDetailDto(
+                id = id,
+                name = name,
+                nameGrouped = nameGrouped,
+                description = description,
+                imageName = imageName,
+                numShowed = numShowed,
+                ingredientType = ingredientTypeMapper.reverse(ingredientType),
+                voltage = voltage)
+    }
 }
