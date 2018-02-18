@@ -5,23 +5,37 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <FrameLayout
-    android:id="@+id/am_fl_btn"
-    style="@style/WrapContent"
+  <android.support.design.widget.AppBarLayout
+    android:id="@+id/myAppBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:layout_anchorGravity="bottom|center_horizontal">
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    app:elevation="0dp">
+
+    <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      android:background="?attr/colorPrimary"
+      app:contentInsetStart="0dp"
+      app:layout_scrollFlags="scroll|enterAlways"/>
+  </android.support.design.widget.AppBarLayout>
+
+  <FrameLayout
+    android:id="@+id/am_fl_btn"
+    style="@style/MatchParent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
   </FrameLayout>
 
   <android.support.design.widget.BottomNavigationView
     android:id="@+id/navigation"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
     android:layout_gravity="bottom"
     android:background="@android:color/white"
     app:itemIconTint="@drawable/color_state_primary"
     app:itemTextColor="@drawable/color_state_primary"
-    app:menu="@menu/menu_bottom_navigation_basic" />
+    app:menu="@menu/menu_bottom_navigation_basic"/>
 
 </android.support.design.widget.CoordinatorLayout>
