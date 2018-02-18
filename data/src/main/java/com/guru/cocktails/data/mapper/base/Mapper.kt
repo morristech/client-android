@@ -4,11 +4,6 @@ import java.util.*
 
 abstract class Mapper<To, From> {
 
-    val invalidInt = -1
-    val invalidLong = (-1).toLong()
-    val invalidDouble = -1.0
-    val emptyString = ""
-
     abstract fun map(from: From): To
 
     abstract fun reverse(to: To): From
@@ -29,5 +24,12 @@ abstract class Mapper<To, From> {
             return result
         }
         return emptyList()
+    }
+
+    companion object {
+        const val INVALID_INT = -1
+        const val INVALID_LONG = -1L
+        const val INVALID_DOUBLE = -1.0
+        const val EMPTY_STRING = ""
     }
 }

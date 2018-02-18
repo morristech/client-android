@@ -18,8 +18,10 @@
       android:layout_width="match_parent"
       android:layout_height="?attr/actionBarSize"
       android:background="?attr/colorPrimary"
-      app:contentInsetStart="0dp"
-      app:layout_scrollFlags="scroll|enterAlways"/>
+      app:titleTextColor="@color/font_white_100"
+      app:contentInsetStart="16dp"
+      app:layout_scrollFlags="scroll|enterAlways"
+      app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
   </android.support.design.widget.AppBarLayout>
 
   <FrameLayout
@@ -28,14 +30,10 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
   </FrameLayout>
 
-  <android.support.design.widget.BottomNavigationView
+  <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
     android:id="@+id/navigation"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
-    android:background="@android:color/white"
-    app:itemIconTint="@drawable/color_state_primary"
-    app:itemTextColor="@drawable/color_state_primary"
-    app:menu="@menu/menu_bottom_navigation_basic"/>
+    android:layout_gravity="bottom"/>
 
 </android.support.design.widget.CoordinatorLayout>

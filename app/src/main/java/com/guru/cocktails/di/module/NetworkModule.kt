@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import com.guru.cocktails.BuildConfig
 import com.guru.cocktails.R
 import com.guru.cocktails.data.source.remote.RequestInterceptor
+import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -25,12 +26,13 @@ import javax.net.ssl.X509TrustManager
 @Module
 class NetworkModule {
 
-    @Provides @Named("productionOkhttpClient")
+    @Provides
+    @Named("productionOkhttpClient")
     @Singleton
     internal fun provideOkHttpClient(context: Context): OkHttpClient {
 
         val client = OkHttpClient.Builder()
-        client.addInterceptor(RequestInterceptor(context.getString(R.string.api_auth_user),context.getString(R.string.api_auth_key)))
+        client.addInterceptor(RequestInterceptor(context.getString(R.string.api_auth_user), context.getString(R.string.api_auth_key)))
 
         if (BuildConfig.DEBUG) {
 
@@ -56,7 +58,8 @@ class NetworkModule {
             .build()
     }
 
-    @Provides @Named("unsafeOkhttpClient")
+    @Provides
+    @Named("unsafeOkhttpClient")
     @Singleton
     internal fun provideUnsafeOkhttpClient(context: Context): OkHttpClient {
 
@@ -84,7 +87,7 @@ class NetworkModule {
         client.hostnameVerifier { _, _ -> true }
 
         /* Rest of config*/
-        client.addInterceptor(RequestInterceptor(context.getString(R.string.api_auth_user),context.getString(R.string.api_auth_key)))
+        client.addInterceptor(RequestInterceptor(context.getString(R.string.api_auth_user), context.getString(R.string.api_auth_key)))
         client.addNetworkInterceptor(StethoInterceptor())
 
         val logInterceptor = HttpLoggingInterceptor()
@@ -96,5 +99,21 @@ class NetworkModule {
         }
 
         return client.build()
+    }
+
+
+    @Provides
+    @Singleton
+    fun providePicasso(context: Context): Picasso {
+        val picasso = Picasso.Builder(context).build()
+
+        Picasso.setSingletonInstance(picasso)
+
+        if (BuildConfig.DEBUG) {
+            picasso.setIndicatorsEnabled(true)
+            picasso.isLoggingEnabled = true
+        }
+
+        return picasso
     }
 }

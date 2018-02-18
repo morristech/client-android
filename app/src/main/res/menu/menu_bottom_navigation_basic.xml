@@ -2,18 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
   <item
-    android:id="@+id/navigation_recent"
+    android:id="@+id/nav_cocktails"
     android:icon="@drawable/ic_cocktail_black_24dp"
     android:title="Cocktails"/>
 
   <item
-    android:id="@+id/navigation_favorites"
+    android:id="@+id/nav_my_bar"
     android:icon="@drawable/ic_bar_black_24dp"
     android:title="My Bar"/>
 
   <item
-    android:id="@+id/navigation_nearby"
-    android:icon="@drawable/ic_ingredient_black_24dp"
-    android:title="Ingredients"/>
+    android:id="@+id/nav_profile"
+    android:icon="@drawable/ic_profile_black_24dp"
+    android:title="Profile"/>
+
+  <item
+    android:id="@+id/nav_academy"
+    android:icon="@drawable/ic_academy_black_24dp"
+    android:title="Academy"/>
+
+  <item
+    android:id="@+id/nav_more"
+    android:icon="@drawable/ic_more_black_24dp"
+    android:title="More"/>
 
 </menu>

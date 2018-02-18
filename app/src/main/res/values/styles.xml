@@ -2,22 +2,21 @@
 <resources>
 
 
-
   <!-- Base application theme. -->
   <style name="AppThemeX" parent="Theme.AppCompat.Light.NoActionBar">
     <!-- Customize your theme here. -->
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
+    <item name="colorPrimary">@color/md_blue_500</item>
+    <item name="colorPrimaryDark">@color/md_blue_700</item>
+    <item name="colorAccent">@color/md_blue_500</item>
     <item name="windowActionModeOverlay">true</item>
     <item name="android:actionModeBackground">@color/blue_grey_600</item>
   </style>
 
-  <style name="AppThemeX.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+  <style name="AppThemeX.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar"/>
 
   <style name="Toolbar.Light" parent="@style/AppThemeX">
-    <item name="colorControlNormal">@color/grey_60</item>
-    <item name="android:textColorPrimary">@color/grey_60</item>
+    <item name="colorControlNormal">@color/font_white_100</item>
+    <item name="android:textColorPrimary">@color/font_white_100</item>
   </style>
 
   <style name="TextAppearance.Subhead.Bold" parent="@style/TextAppearance.AppCompat.Subhead">
@@ -26,9 +25,9 @@
 
   <!-- Base application theme. -->
   <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
-    <item name="colorPrimary">#3F51B5</item>
-    <item name="colorPrimaryDark">#3949AB</item>
-    <item name="colorAccent">#00B0FF</item>
+    <item name="colorPrimary">@color/md_blue_500</item>
+    <item name="colorPrimaryDark">@color/md_blue_700</item>
+    <item name="colorAccent">@color/md_blue_500</item>
   </style>
 
   <style name="AppThemeTranslucent" parent="AppTheme.Base">
@@ -99,4 +98,11 @@
     <item name="android:orientation">horizontal</item>
   </style>
 
+  <!-- Texts-->
+  <style name="TextAppearance.Design.CollapsingToolbar.Expanded.Shadow">
+    <item name="android:shadowDy">0</item>
+    <item name="android:shadowDx">0</item>
+    <item name="android:shadowRadius">8</item>
+    <item name="android:shadowColor">@android:color/black</item>
+  </style>
 </resources>

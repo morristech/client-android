@@ -1,7 +1,7 @@
 package com.guru.cocktails
 
-import android.app.Application
 import android.os.StrictMode
+import android.support.multidex.MultiDexApplication
 import com.facebook.stetho.Stetho
 import com.guru.cocktails.di.component.ApplicationComponent
 import com.guru.cocktails.di.component.DaggerApplicationComponent
@@ -10,7 +10,7 @@ import com.guru.cocktails.platform.logging.ErrorReportingTree
 import com.squareup.leakcanary.LeakCanary
 import timber.log.Timber
 
-open class App : Application() {
+open class App : MultiDexApplication() {
 
     lateinit var applicationComponent: ApplicationComponent
 

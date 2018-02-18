@@ -12,24 +12,28 @@ import com.guru.cocktails.R
 import com.guru.cocktails.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_description.*
 
-
 class DescriptionActivity : BaseActivity() {
 
+    lateinit var item: DescriptionViewModel
+
     override fun layoutId() = R.layout.activity_description
+
+    override fun inject() {
+        App.instance.appComponent().inject(this)
+    }
+
+    override fun extractArguments() {
+        item = intent.extras.getParcelable<DescriptionViewModel>(ARGS_DESCRIPTION_VIEW_MODEL)?.let { it }
+            ?: throw IllegalStateException("DescriptionViewModel was not passed in via Bundle")
+    }
 
     override fun onViewsBound() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_black_24dp)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val title = intent.getStringExtra(EXTRA_TITLE)
-        val des = intent.getStringExtra(EXTRA_DESCRIPTION)
-        supportActionBar?.title = title
-        des?.let { ad_tv_content.text = it }
-
-    }
-
-    override fun inject() {
-        App.instance.appComponent().inject(this)
+        supportActionBar?.title = item.title
+        ad_tv_content.text = item.desctiption
+        picasso.load(item.imageUrl).into(image)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -60,15 +64,11 @@ class DescriptionActivity : BaseActivity() {
 
     companion object {
 
-        fun newBundle(title: String, description: String): Bundle {
-            val bundle = Bundle()
-            bundle.putString(EXTRA_TITLE, title)
-            bundle.putString(EXTRA_DESCRIPTION, description)
-            return bundle
+        fun newBundle(item: DescriptionViewModel) = Bundle().apply {
+            putParcelable(ARGS_DESCRIPTION_VIEW_MODEL, item)
         }
 
-        private val EXTRA_TITLE = "EXTRA_TITLE"
-        private val EXTRA_DESCRIPTION = "EXTRA_DESCRIPTION"
+        private const val ARGS_DESCRIPTION_VIEW_MODEL = "ARGS_DESCRIPTION_VIEW_MODEL"
     }
 
 }

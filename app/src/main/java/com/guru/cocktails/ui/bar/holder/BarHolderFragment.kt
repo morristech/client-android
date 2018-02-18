@@ -7,8 +7,9 @@ import com.guru.cocktails.App
 import com.guru.cocktails.R
 import com.guru.cocktails.di.component.DaggerViewComponent
 import com.guru.cocktails.di.module.PresenterModule
-import com.guru.cocktails.ui._remove.example3.fragment.Example3Fragment
 import com.guru.cocktails.ui.bar.holder.BarHolderContract.Presenter
+import com.guru.cocktails.ui.bar.ingredients.IngredientsFragment
+import com.guru.cocktails.ui.bar.ingredients.Type
 import com.guru.cocktails.ui.base.BaseFragment
 import com.guru.cocktails.ui.base.SectionsPagerAdapter
 import kotlinx.android.synthetic.main.fragment_tabs.*
@@ -52,9 +53,17 @@ class BarHolderFragment : BaseFragment(), BarHolderContract.View {
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = SectionsPagerAdapter(childFragmentManager)
-        adapter.addFragment(Example3Fragment.newInstance(), "This")
-        adapter.addFragment(Example3Fragment.newInstance(), "IS")
-        adapter.addFragment(Example3Fragment.newInstance(), "Baar biatch")
+        val alcoBundle = IngredientsFragment.createBundle(Type.Alcoholic())
+        val alcoNonBundle = IngredientsFragment.createBundle(Type.NonAlcoholic())
+
+        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "INTRO")
+        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "MY COCKTAILS")
+        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "MY BAR")
+        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "SUGGESTIONS")
+        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "SHOPPING LIST")
+        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "ALCOHOLIC")
+        adapter.addFragment(IngredientsFragment.newInstance(alcoNonBundle), "NON ALCOHOLIC")
+
         viewPager.adapter = adapter
     }
 

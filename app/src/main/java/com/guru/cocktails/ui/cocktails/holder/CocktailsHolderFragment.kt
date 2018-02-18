@@ -7,7 +7,8 @@ import com.guru.cocktails.App
 import com.guru.cocktails.R
 import com.guru.cocktails.di.component.DaggerViewComponent
 import com.guru.cocktails.di.module.PresenterModule
-import com.guru.cocktails.ui._remove.example3.fragment.Example3Fragment
+import com.guru.cocktails.ui.bar.ingredients.IngredientsFragment
+import com.guru.cocktails.ui.bar.ingredients.Type
 import com.guru.cocktails.ui.base.BaseFragment
 import com.guru.cocktails.ui.base.SectionsPagerAdapter
 import com.guru.cocktails.ui.cocktails.holder.CocktailsHolderContract.Presenter
@@ -51,10 +52,17 @@ class CocktailsHolderFragment : BaseFragment(), CocktailsHolderContract.View {
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
+
         val adapter = SectionsPagerAdapter(childFragmentManager)
-        adapter.addFragment(Example3Fragment.newInstance(), "CO")
-        adapter.addFragment(Example3Fragment.newInstance(), "CK")
-        adapter.addFragment(Example3Fragment.newInstance(), "TAILS")
+        val alcoBundle = IngredientsFragment.createBundle(Type.Alcoholic())
+
+        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "INTRO")
+        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "IBA")
+        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "TOP 100")
+        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "PACKAGES")
+        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "ALCOHOL FREE")
+        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "RANDOM")
+
         viewPager.adapter = adapter
     }
 
