@@ -2,27 +2,27 @@ package com.guru.cocktails.ui.cocktails
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.CoordinatorLayout
 import com.guru.cocktails.App
 import com.guru.cocktails.R
 import com.guru.cocktails.platform.extensions.lazyFast
 import com.guru.cocktails.ui.bar.holder.BarHolderFragment
 import com.guru.cocktails.ui.base.BaseActivity
+import com.guru.cocktails.ui.base.view.BottomNavigationViewBehavior
 import com.guru.cocktails.ui.cocktails.holder.CocktailsHolderFragment
 import com.guru.cocktails.ui.ingredients.holder.IngredientsHolderFragment
 import com.guru.cocktails.ui.shared.DrawerItems
 import com.guru.cocktails.ui.shared.DrawerManager
 import kotlinx.android.synthetic.main.activity_drawer.*
 
-
-
 class MainActivity : BaseActivity() {
 
     private lateinit var drawerManager: DrawerManager
 
+    private val BOTTOM_NAVIGATION_ANIMATION_LENGTH = 300L
     private val TAG_INGREDIENTS = "TAG_INGREDIENTS"
     private val TAG_COCKTAILS = "TAG_COCKTAILS"
     private val TAG_BAR = "TAG_BAR"
-    var isNavigationHide = false
 
     private val cocktailsFragment by lazyFast { CocktailsHolderFragment.newInstance() }
     private val ingredientsFragment by lazyFast { IngredientsHolderFragment.newInstance() }
@@ -40,6 +40,12 @@ class MainActivity : BaseActivity() {
         super.afterLayout(savedInstanceState)
         drawerManager = DrawerManager(this, DrawerItems.Cocktails())
         showCocktails()
+        setUpBottomNavigation()
+    }
+
+    private fun setUpBottomNavigation() {
+        val layoutParams = navigation.layoutParams as CoordinatorLayout.LayoutParams
+        layoutParams.behavior = BottomNavigationViewBehavior(BOTTOM_NAVIGATION_ANIMATION_LENGTH)
 
         navigation.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -83,10 +89,4 @@ class MainActivity : BaseActivity() {
         transaction.commit()
     }
 
-    private fun animateNavigation(hide: Boolean) {
-        if (isNavigationHide && hide || !isNavigationHide && !hide) return
-        isNavigationHide = hide
-        val moveY = if (hide) 2 * navigation.height else 0
-        navigation.animate().translationY(moveY.toFloat()).setStartDelay(100).setDuration(300).start()
-    }
 }
