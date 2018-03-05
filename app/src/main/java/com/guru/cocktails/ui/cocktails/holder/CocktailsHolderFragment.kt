@@ -7,8 +7,8 @@ import com.guru.cocktails.App
 import com.guru.cocktails.R
 import com.guru.cocktails.di.component.DaggerViewComponent
 import com.guru.cocktails.di.module.PresenterModule
-import com.guru.cocktails.ui.bar.ingredients.IngredientsFragment
-import com.guru.cocktails.ui.bar.ingredients.Type
+import com.guru.cocktails.ui.bar.ingredientlist.IngredientListFragment
+import com.guru.cocktails.ui.bar.ingredientlist.Type
 import com.guru.cocktails.ui.base.BaseFragment
 import com.guru.cocktails.ui.base.SectionsPagerAdapter
 import com.guru.cocktails.ui.cocktails.holder.CocktailsHolderContract.Presenter
@@ -54,14 +54,14 @@ class CocktailsHolderFragment : BaseFragment(), CocktailsHolderContract.View {
     private fun setupViewPager(viewPager: ViewPager) {
 
         val adapter = SectionsPagerAdapter(childFragmentManager)
-        val alcoBundle = IngredientsFragment.createBundle(Type.Alcoholic())
+        val alcoBundle = IngredientListFragment.createBundle(Type.Alcoholic())
 
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "INTRO")
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "IBA")
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "TOP 100")
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "PACKAGES")
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "ALCOHOL FREE")
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "RANDOM")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "INTRO")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "IBA")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "TOP 100")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "PACKAGES")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "ALCOHOL FREE")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "RANDOM")
 
         viewPager.adapter = adapter
     }

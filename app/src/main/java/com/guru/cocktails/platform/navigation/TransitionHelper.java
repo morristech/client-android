@@ -24,8 +24,8 @@ class TransitionHelper {
      *                         participant.
      * @return All transition participants.
      */
-    public static Pair<View, String>[]  createSafeTransitionParticipants(@NonNull Activity activity,
-                                                                         boolean includeStatusBar, @Nullable List<Pair<View, String>>
+    public static Pair<View, String>[] createSafeTransitionParticipants(@NonNull Activity activity,
+                                                                        boolean includeStatusBar, @Nullable List<Pair<View, String>>
                                                                                 otherParticipants) {
         // Avoid system UI glitches as described here:
         // https://plus.google.com/+AlexLockwood/posts/RPtwZ5nNebb

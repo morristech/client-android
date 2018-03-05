@@ -1,4 +1,4 @@
-package com.guru.cocktails.ui.bar.ingredients
+package com.guru.cocktails.ui.bar.ingredientlist
 
 import android.os.Bundle
 import android.support.v4.util.Pair
@@ -12,23 +12,22 @@ import com.guru.cocktails.di.module.PresenterModule
 import com.guru.cocktails.domain.model.ingredient.IngredientThumb
 import com.guru.cocktails.platform.extensions.ifAdded
 import com.guru.cocktails.platform.extensions.lazyFast
-import com.guru.cocktails.ui.bar.ingredients.IngredientsContract.Presenter
-import com.guru.cocktails.ui.bar.ingredients.IngredientsViewState.*
+import com.guru.cocktails.ui.bar.ingredientlist.IngredientListContract.Presenter
+import com.guru.cocktails.ui.bar.ingredientlist.IngredientListViewState.*
 import com.guru.cocktails.ui.base.BaseFragment
-import com.guru.cocktails.ui.ingredient.IngredientActivity
+import com.guru.cocktails.ui.ingredientdetail.IngredientDetailActivity
 import kotlinx.android.synthetic.main.recycler_view.*
-import timber.log.Timber
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
 
-class IngredientsFragment : BaseFragment(), IngredientsContract.View {
+class IngredientListFragment : BaseFragment(), IngredientListContract.View {
 
     private lateinit var type: Type
     private var presenter: Presenter? = null
-    private val adapter by lazyFast { IngredientsAdapter(this, picasso) }
+    private val adapter by lazyFast { IngredientListAdapter(this, picasso) }
 
-    override var viewState: IngredientsViewState by Delegates.observable<IngredientsViewState>(
+    override var viewState: IngredientListViewState by Delegates.observable<IngredientListViewState>(
         Init(), { _, _, new -> processStateChange(new) })
 
     override fun layoutId() = R.layout.recycler_view
@@ -76,20 +75,18 @@ class IngredientsFragment : BaseFragment(), IngredientsContract.View {
     }
 
     override fun onClick(item: IngredientThumb, sharedElements: List<Pair<View, String>>?) {
-        activity?.let {
-            ifAdded {
+            ifAdded { abc->
                 //TODO picasso.load(item.imageUrl).fetch() prefetch large image
                 navigator.navigate(
-                    source = it,
-                    target = IngredientActivity::class.java,
+                    source = abc,
+                    target = IngredientDetailActivity::class.java,
                 //    sharedElements = sharedElements,
-                    bundle = IngredientActivity.createBundle(item.id)
+                    bundle = IngredientDetailActivity.createBundle(item.id)
                 )
-            }
-        } ?: Timber.e("Activity was null")
+        }
     }
 
-    private fun processStateChange(new: IngredientsViewState) {
+    private fun processStateChange(new: IngredientListViewState) {
         return when (new) {
             is Init            -> initialize()
             is Loading         -> loading()
@@ -120,7 +117,7 @@ class IngredientsFragment : BaseFragment(), IngredientsContract.View {
 
     companion object {
 
-        fun newInstance(bundle: Bundle) = IngredientsFragment().apply {
+        fun newInstance(bundle: Bundle) = IngredientListFragment().apply {
             arguments = bundle
         }
 

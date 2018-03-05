@@ -1,4 +1,4 @@
-package com.guru.cocktails.ui.bar.ingredients
+package com.guru.cocktails.ui.bar.ingredientlist
 
 import android.support.v4.util.Pair
 import android.support.v7.widget.RecyclerView
@@ -13,10 +13,10 @@ import kotlinx.android.synthetic.main.item_coctail_grid.view.*
 import kotlin.properties.Delegates
 
 
-class IngredientsAdapter(
+class IngredientListAdapter(
     val callbacks: Callbacks,
     val picasso: Picasso
-) : RecyclerView.Adapter<IngredientsAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<IngredientListAdapter.ViewHolder>() {
 
     private var items: List<IngredientThumb> by Delegates.observable(emptyList()) { prop, old, new ->
         notifyNewData(old, new) { o, n -> o == n }

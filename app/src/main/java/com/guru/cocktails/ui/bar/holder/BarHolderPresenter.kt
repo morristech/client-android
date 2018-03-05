@@ -26,19 +26,19 @@ class BarHolderPresenter
     override fun refresh(city: String) {
         val disposable = getWeatherRemotelyUseCase
             .execute(city)
-            .doOnSubscribe { setViewState(ViewState.Loading()) }
-            .doFinally { setViewState(ViewState.LoadingFinished()) }
+            .doOnSubscribe { setDetailViewState(ViewState.Loading()) }
+            .doFinally { setDetailViewState(ViewState.LoadingFinished()) }
             .subscribeWith(
                 getDisposableSingleObserver(
-                    { setViewState(ViewState.Success(it)) },
-                    { setViewState(ViewState.Error(it)) })
+                    { setDetailViewState(ViewState.Success(it)) },
+                    { setDetailViewState(ViewState.Error(it)) })
             )
         disposables.add(disposable)
     }
 */
 /*
-    private fun setViewState(state: ViewState) {
-        view?.viewState = state
+    private fun setDetailViewState(state: ViewState) {
+        view?.detailViewState = state
     }*/
 
 }

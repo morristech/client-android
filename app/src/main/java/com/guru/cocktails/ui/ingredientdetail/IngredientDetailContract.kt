@@ -1,13 +1,14 @@
-package com.guru.cocktails.ui.ingredient
+package com.guru.cocktails.ui.ingredientdetail
 
-import com.guru.cocktails.ui.bar.ingredients.IngredientsAdapter
+import com.guru.cocktails.ui.bar.ingredientlist.IngredientListAdapter
 import com.guru.cocktails.ui.base.BasePresenter
 import com.guru.cocktails.ui.base.BaseView
 
-interface IngredientContract {
-    interface View : BaseView<Presenter>, IngredientsAdapter.Callbacks {
+interface IngredientDetailContract {
+    interface View : BaseView<Presenter>, IngredientListAdapter.Callbacks {
         override fun attachPresenter(presenter: Presenter)
-        var viewState: IngredientViewState
+        var detailViewState: IngredientDetailViewState
+        fun setTitle(djksbadfjsa:String)
     }
 
     interface Presenter : BasePresenter<View> {

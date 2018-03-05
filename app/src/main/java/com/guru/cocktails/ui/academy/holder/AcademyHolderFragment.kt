@@ -8,8 +8,8 @@ import com.guru.cocktails.R
 import com.guru.cocktails.di.component.DaggerViewComponent
 import com.guru.cocktails.di.module.PresenterModule
 import com.guru.cocktails.ui.academy.holder.AcademyHolderContract.Presenter
-import com.guru.cocktails.ui.bar.ingredients.IngredientsFragment
-import com.guru.cocktails.ui.bar.ingredients.Type
+import com.guru.cocktails.ui.bar.ingredientlist.IngredientListFragment
+import com.guru.cocktails.ui.bar.ingredientlist.Type
 import com.guru.cocktails.ui.base.BaseFragment
 import com.guru.cocktails.ui.base.SectionsPagerAdapter
 import kotlinx.android.synthetic.main.fragment_tabs.*
@@ -54,14 +54,14 @@ class AcademyHolderFragment : BaseFragment(), AcademyHolderContract.View {
     private fun setupViewPager(viewPager: ViewPager) {
 
         val adapter = SectionsPagerAdapter(childFragmentManager)
-        val alcoBundle = IngredientsFragment.createBundle(Type.Alcoholic())
+        val alcoBundle = IngredientListFragment.createBundle(Type.Alcoholic())
 
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "TOOLS")
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "GLASSWARE")
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "GARNISHES")
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "COCKTAIL TYPES")
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "TECHNIQUES")
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "TERMINOLOGY")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "TOOLS")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "GLASSWARE")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "GARNISHES")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "COCKTAIL TYPES")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "TECHNIQUES")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "TERMINOLOGY")
 
         viewPager.adapter = adapter
     }

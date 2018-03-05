@@ -1,4 +1,4 @@
-package com.guru.cocktails.ui.ingredient
+package com.guru.cocktails.ui.ingredientdetail
 
 import android.os.Bundle
 import android.support.v4.util.Pair
@@ -13,24 +13,30 @@ import com.guru.cocktails.di.component.DaggerViewComponent
 import com.guru.cocktails.di.module.PresenterModule
 import com.guru.cocktails.domain.model.ingredient.IngredientDetail
 import com.guru.cocktails.domain.model.ingredient.IngredientThumb
-import com.guru.cocktails.ui.bar.ingredients.IngredientsAdapter
+import com.guru.cocktails.ui.bar.ingredientlist.IngredientListAdapter
 import com.guru.cocktails.ui.base.BaseActivity
 import com.guru.cocktails.ui.description.DescriptionActivity
 import com.guru.cocktails.ui.description.DescriptionViewModel
-import com.guru.cocktails.ui.ingredient.IngredientViewState.*
+import com.guru.cocktails.ui.ingredientdetail.IngredientDetailViewState.*
 import kotlinx.android.synthetic.main.activity_ingredient.*
 import timber.log.Timber
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
-class IngredientActivity : BaseActivity(), IngredientContract.View {
+class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
 
-    private var presenter: IngredientContract.Presenter? = null
+
+    override fun setTitle(djksbadfjsa: String) {
+
+    }
+
+    @Inject lateinit var presenter: IngredientDetailContract.Presenter
     private var ingredientId: Int = -1
     private var ingredientDetail: IngredientDetail? = null
 
-    override var viewState: IngredientViewState by Delegates.observable<IngredientViewState>(
-        Init(), { _, _, new -> processStateChange(new) })
+    override var detailViewState: IngredientDetailViewState by Delegates.observable<IngredientDetailViewState>(
+            Init(), { _, _, new -> processStateChange(new) }
+    )
 
     override fun layoutId() = R.layout.activity_ingredient
 
@@ -50,6 +56,9 @@ class IngredientActivity : BaseActivity(), IngredientContract.View {
             .applicationComponent(App.instance.appComponent())
             .build()
             .inject(this)
+
+        this.presenter = presenter
+        this.presenter?.attachView(this)
     }
 
     override fun extractArguments() {
@@ -69,18 +78,18 @@ class IngredientActivity : BaseActivity(), IngredientContract.View {
         collapsing_toolbar.title = "White rum"
 
         val cocktails = listOf(
-            IngredientThumb(1, "1", "1", 1.0),
-            IngredientThumb(1, "1", "1", 1.0),
-            IngredientThumb(1, "1", "1", 1.0),
-            IngredientThumb(1, "1", "1", 1.0),
-            IngredientThumb(1, "1", "1", 1.0),
-            IngredientThumb(1, "1", "1", 1.0),
-            IngredientThumb(1, "1", "1", 1.0),
-            IngredientThumb(1, "1", "1", 1.0)
+                IngredientThumb(1, "1", "1", 1.0),
+                IngredientThumb(1, "1", "1", 1.0),
+                IngredientThumb(1, "1", "1", 1.0),
+                IngredientThumb(1, "1", "1", 1.0),
+                IngredientThumb(1, "1", "1", 1.0),
+                IngredientThumb(1, "1", "1", 1.0),
+                IngredientThumb(1, "1", "1", 1.0),
+                IngredientThumb(1, "1", "1", 1.0)
         )
 
         val manager = GridLayoutManager(this, 2)
-        val adapterAbc = IngredientsAdapter(this, picasso)
+        val adapterAbc = IngredientListAdapter(this, picasso)
         adapterAbc.updateData(cocktails)
         ai_rv.layoutManager = manager
         ai_rv.adapter = adapterAbc
@@ -92,12 +101,12 @@ class IngredientActivity : BaseActivity(), IngredientContract.View {
     }
 
     @Inject
-    override fun attachPresenter(presenter: IngredientContract.Presenter) {
+    override fun attachPresenter(presenter: IngredientDetailContract.Presenter) {
         this.presenter = presenter
         this.presenter?.attachView(this)
     }
 
-    private fun processStateChange(new: IngredientViewState) {
+    private fun processStateChange(new: IngredientDetailViewState) {
         return when (new) {
             is Init            -> initialize()
             is Loading         -> loading()
@@ -134,8 +143,17 @@ class IngredientActivity : BaseActivity(), IngredientContract.View {
 
     private fun navigateToDescriptionDetail() {
         ingredientDetail?.let {
-            val pairs = listOf(Pair(place_detail as View, "description"), Pair(image as View, "image"))
-            val bundle = DescriptionActivity.newBundle(DescriptionViewModel(it.name, it.description, it.imageName))
+            val pairs = listOf(
+                    Pair(place_detail as View, "description"),
+                    Pair(image as View, "image")
+            )
+            val bundle = DescriptionActivity.newBundle(
+                    DescriptionViewModel(
+                            it.name,
+                            it.description,
+                            it.imageName
+                    )
+            )
             navigator.navigate(this, DescriptionActivity::class.java, bundle, pairs)
         } ?: Timber.e(IllegalStateException("Ingredient with id : $ingredientId was null"))
     }
