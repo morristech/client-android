@@ -24,7 +24,7 @@
       android:theme="@style/Theme.AppCompat.Light"/>
 
     <activity
-      android:name=".ui.ingredient.IngredientActivity"
+      android:name=".ui.ingredientdetail.IngredientDetailActivity"
       android:theme="@style/AppThemeTranslucent"/>
 
     <activity

@@ -29,11 +29,11 @@ class Example2PresenterTest {
         presenter.refresh(CITY)
 
 /*  TODO make this happen
-        Log.e(TAG, "viewState = " + presenter.view?.viewState.toString());
-        Log.e(TAG, "mockvie = " + mockView.viewState.toString());
+        Log.e(TAG, "detailViewState = " + presenter.view?.detailViewState.toString());
+        Log.e(TAG, "mockvie = " + mockView.detailViewState.toString());
 
-        verify(mockView).viewState = Matchers.isA(ViewState.Loading::class.java)
-        verify(mockView).viewState = isA<ViewState.Error>()
+        verify(mockView).detailViewState = Matchers.isA(ViewState.Loading::class.java)
+        verify(mockView).detailViewState = isA<ViewState.Error>()
         verifyNoMoreInteractions(mockView)
         */
 

@@ -1,19 +1,19 @@
-package com.guru.cocktails.ui.bar.ingredients
+package com.guru.cocktails.ui.bar.ingredientlist
 
 import com.guru.cocktails.di.scope.ViewScope
 import com.guru.cocktails.domain.interactor.definition.IngredientsUseCase
 import com.guru.cocktails.platform.extensions.getDisposableSubscriber
-import com.guru.cocktails.ui.bar.ingredients.IngredientsContract.View
-import com.guru.cocktails.ui.bar.ingredients.IngredientsViewState.*
+import com.guru.cocktails.ui.bar.ingredientlist.IngredientListContract.View
+import com.guru.cocktails.ui.bar.ingredientlist.IngredientListViewState.*
 import com.guru.cocktails.ui.base.BasePresenterImpl
 import javax.inject.Inject
 
 
 @ViewScope
-class IngredientsPresenter
+class IngredientListPresenter
 @Inject constructor(
     private val ingredientsUseCase: IngredientsUseCase
-) : BasePresenterImpl(), IngredientsContract.Presenter {
+) : BasePresenterImpl(), IngredientListContract.Presenter {
 
     private var view: View? = null
     private lateinit var type: Type
@@ -49,7 +49,7 @@ class IngredientsPresenter
         disposables.add(disposable)
     }
 
-    private fun setViewState(state: IngredientsViewState) {
+    private fun setViewState(state: IngredientListViewState) {
         view?.viewState = state
     }
 }

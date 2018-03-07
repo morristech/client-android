@@ -8,8 +8,8 @@ import com.guru.cocktails.R
 import com.guru.cocktails.di.component.DaggerViewComponent
 import com.guru.cocktails.di.module.PresenterModule
 import com.guru.cocktails.ui.bar.holder.BarHolderContract.Presenter
-import com.guru.cocktails.ui.bar.ingredients.IngredientsFragment
-import com.guru.cocktails.ui.bar.ingredients.Type
+import com.guru.cocktails.ui.bar.ingredientlist.IngredientListFragment
+import com.guru.cocktails.ui.bar.ingredientlist.Type
 import com.guru.cocktails.ui.base.BaseFragment
 import com.guru.cocktails.ui.base.SectionsPagerAdapter
 import kotlinx.android.synthetic.main.fragment_tabs.*
@@ -53,16 +53,16 @@ class BarHolderFragment : BaseFragment(), BarHolderContract.View {
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = SectionsPagerAdapter(childFragmentManager)
-        val alcoBundle = IngredientsFragment.createBundle(Type.Alcoholic())
-        val alcoNonBundle = IngredientsFragment.createBundle(Type.NonAlcoholic())
+        val alcoBundle = IngredientListFragment.createBundle(Type.Alcoholic())
+        val alcoNonBundle = IngredientListFragment.createBundle(Type.NonAlcoholic())
 
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "INTRO")
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "MY COCKTAILS")
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "MY BAR")
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "SUGGESTIONS")
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "SHOPPING LIST")
-        adapter.addFragment(IngredientsFragment.newInstance(alcoBundle), "ALCOHOLIC")
-        adapter.addFragment(IngredientsFragment.newInstance(alcoNonBundle), "NON ALCOHOLIC")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "INTRO")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "MY COCKTAILS")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "MY BAR")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "SUGGESTIONS")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "SHOPPING LIST")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "ALCOHOLIC")
+        adapter.addFragment(IngredientListFragment.newInstance(alcoNonBundle), "NON ALCOHOLIC")
 
         viewPager.adapter = adapter
     }

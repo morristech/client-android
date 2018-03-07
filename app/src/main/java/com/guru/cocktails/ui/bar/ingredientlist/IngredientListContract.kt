@@ -1,12 +1,12 @@
-package com.guru.cocktails.ui.bar.ingredients
+package com.guru.cocktails.ui.bar.ingredientlist
 
 import com.guru.cocktails.ui.base.BasePresenter
 import com.guru.cocktails.ui.base.BaseView
 
-interface IngredientsContract {
-    interface View : BaseView<Presenter>, IngredientsAdapter.Callbacks {
+interface IngredientListContract {
+    interface View : BaseView<Presenter>, IngredientListAdapter.Callbacks {
         override fun attachPresenter(presenter: Presenter)
-        var viewState: IngredientsViewState
+        var viewState: IngredientListViewState
     }
 
     interface Presenter : BasePresenter<View> {

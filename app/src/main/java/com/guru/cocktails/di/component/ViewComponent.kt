@@ -4,9 +4,9 @@ import com.guru.cocktails.di.module.PresenterModule
 import com.guru.cocktails.di.scope.ViewScope
 import com.guru.cocktails.ui.academy.holder.AcademyHolderFragment
 import com.guru.cocktails.ui.bar.holder.BarHolderFragment
-import com.guru.cocktails.ui.bar.ingredients.IngredientsFragment
+import com.guru.cocktails.ui.bar.ingredientlist.IngredientListFragment
 import com.guru.cocktails.ui.cocktails.holder.CocktailsHolderFragment
-import com.guru.cocktails.ui.ingredient.IngredientActivity
+import com.guru.cocktails.ui.ingredientdetail.IngredientDetailActivity
 import dagger.Component
 
 @ViewScope
@@ -21,8 +21,8 @@ import dagger.Component
 interface ViewComponent {
 
     fun inject(item: AcademyHolderFragment)
-    fun inject(item: IngredientsFragment)
-    fun inject(item: IngredientActivity)
+    fun inject(item: IngredientListFragment)
+    fun inject(item: IngredientDetailActivity)
 
     fun inject(item: CocktailsHolderFragment)
     fun inject(item: BarHolderFragment)
