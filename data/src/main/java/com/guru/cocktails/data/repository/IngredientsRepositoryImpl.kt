@@ -23,16 +23,16 @@ constructor(
 
     override fun getAllAlcoholicIngredients(): Flowable<List<IngredientThumb>> {
         return remoteSource
-            .getAllAlcoholicIngredients()
-            .map { ingredientThumbMapper.map(it.list) }
+            .getIngredientList()
+            .map { ingredientThumbMapper.map(it.ingredientList) }
             .map { it.sortedBy { it.name } }
             .toFlowable()
     }
 
     override fun getAllNonAlcoholicIngredients(): Flowable<List<IngredientThumb>> {
         return remoteSource
-            .getAllNonAlcoholicIngredients()
-            .map { ingredientThumbMapper.map(it.list) }
+            .getIngredientList()
+            .map { ingredientThumbMapper.map(it.ingredientList) }
             .map { it.sortedBy { it.name } }
             .toFlowable()
     }
