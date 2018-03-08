@@ -15,6 +15,7 @@ class IngredientThumbMapper
         IngredientThumb(
             id = id ?: INVALID_INT,
             name = nameGrouped ?: EMPTY_STRING,
+            imageName = imageName ?: EMPTY_STRING,
             imageUrl = "${baseUrl}assets/ingred/thumb_300/$imageName",
             voltage = voltage ?: INVALID_DOUBLE
         )
