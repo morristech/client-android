@@ -33,10 +33,10 @@ class IngredientDetailPresenter @Inject constructor(
             .doOnSubscribe { setViewState(Loading()) }
             .doFinally { setViewState(LoadingFinished()) }
             .subscribeWith(
-                    getDisposableSubscriber(
-                            { setViewState(Success(it)) },
-                            { setViewState(Error(it)) }
-                    )
+                getDisposableSubscriber(
+                    { setViewState(Success(it)) },
+                    { setViewState(Error(it)) }
+                )
             )
         disposables.add(disposable)
     }
