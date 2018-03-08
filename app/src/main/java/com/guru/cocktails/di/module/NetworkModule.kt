@@ -6,9 +6,11 @@ import com.google.gson.Gson
 import com.guru.cocktails.BuildConfig
 import com.guru.cocktails.R
 import com.guru.cocktails.data.source.remote.RequestInterceptor
+import com.jakewharton.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -27,12 +29,20 @@ import javax.net.ssl.X509TrustManager
 class NetworkModule {
 
     @Provides
+    @Named("baseUrl")
+    @Singleton
+    internal fun provideBaseUrl(context: Context): String {
+        return context.getString(R.string.base_url)
+    }
+
+    @Provides
     @Named("productionOkhttpClient")
     @Singleton
-    internal fun provideOkHttpClient(context: Context): OkHttpClient {
+    internal fun provideOkHttpClient(context: Context, cache: Cache): OkHttpClient {
 
         val client = OkHttpClient.Builder()
         client.addInterceptor(RequestInterceptor(context.getString(R.string.api_auth_user), context.getString(R.string.api_auth_key)))
+        client.cache(cache)
 
         if (BuildConfig.DEBUG) {
 
@@ -48,10 +58,13 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    internal fun provideRestAdapter(context: Context, @Named("unsafeOkhttpClient") okHttpClient: OkHttpClient): Retrofit {
+    internal fun provideRestAdapter(
+        @Named("unsafeOkhttpClient") okHttpClient: OkHttpClient,
+        @Named("baseUrl") baseUrl: String
+    ): Retrofit {
 
         return Retrofit.Builder()
-            .baseUrl(context.getString(R.string.base_url))
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create(Gson()))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)
@@ -61,7 +74,7 @@ class NetworkModule {
     @Provides
     @Named("unsafeOkhttpClient")
     @Singleton
-    internal fun provideUnsafeOkhttpClient(context: Context): OkHttpClient {
+    internal fun provideUnsafeOkhttpClient(context: Context, cache: Cache): OkHttpClient {
 
         /* Trust anything*/
         val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
@@ -85,6 +98,7 @@ class NetworkModule {
         val client = OkHttpClient.Builder()
         client.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
         client.hostnameVerifier { _, _ -> true }
+        client.cache(cache)
 
         /* Rest of config*/
         client.addInterceptor(RequestInterceptor(context.getString(R.string.api_auth_user), context.getString(R.string.api_auth_key)))
@@ -104,8 +118,11 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun providePicasso(context: Context): Picasso {
-        val picasso = Picasso.Builder(context).build()
+    fun providePicasso(context: Context, @Named("unsafeOkhttpClient") okHttpClient: OkHttpClient): Picasso {
+        val picasso = Picasso
+            .Builder(context)
+            .downloader(OkHttp3Downloader(okHttpClient))
+            .build()
 
         Picasso.setSingletonInstance(picasso)
 
@@ -115,5 +132,12 @@ class NetworkModule {
         }
 
         return picasso
+    }
+
+    @Provides
+    @Singleton
+    fun provideCache(context: Context): Cache {
+        val cacheSize = 150L * 1024 * 1024  //150 MB
+        return Cache(context.cacheDir, cacheSize)
     }
 }
