@@ -18,7 +18,8 @@ import java.util.concurrent.TimeUnit
  */
 class ConnectivityChecker(
     private val connectivityManager: ConnectivityManager,
-    private val callbacks: Callbacks) {
+    private val callbacks: Callbacks
+) {
 
     private val INITIAL_INTERVAL: Long = 1
     private val HW_CHECK_INTERVAL: Long = 500       // how often do you want to check if WIFI/CELLULAR is on ?

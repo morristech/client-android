@@ -100,7 +100,7 @@ fun <T> getDisposableSingleObserver(onNext: (T) -> Unit, onError: (Throwable) ->
     }
 }
 
-fun <T> getDisposableCompletableObserver(onComplete: () -> Unit, onError: (Throwable) -> Unit = {}): DisposableCompletableObserver {
+fun getDisposableCompletableObserver(onComplete: () -> Unit, onError: (Throwable) -> Unit = {}): DisposableCompletableObserver {
 
     return object : DisposableCompletableObserver() {
 
