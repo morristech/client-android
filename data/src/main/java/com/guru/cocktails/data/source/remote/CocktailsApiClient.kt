@@ -15,6 +15,6 @@ interface CocktailsApiClient {
         @Query("pageSize") pageSize: Int
     ): Single<ListBundle<IngredientThumbDto>>
 
-    @GET("alcoIngredientDetail")
+    @GET("/ingredient/detail")
     fun getIngredientDetail(@Query("id") id: Int): Single<IngredientDetailDto>
 }
