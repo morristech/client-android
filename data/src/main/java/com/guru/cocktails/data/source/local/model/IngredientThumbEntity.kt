@@ -4,10 +4,13 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
 @Entity
-data class WeatherEntity(
+data class IngredientThumbEntity(
     @PrimaryKey()
-    val uid: Long,
+    val id: Int,
+    val imageName: String,
     val name: String,
-    val visibility: Int
+    val voltage: Double
 )
+
+const val TABLE_INGREDIENT_THUMB = "IngredientThumbEntity"
 

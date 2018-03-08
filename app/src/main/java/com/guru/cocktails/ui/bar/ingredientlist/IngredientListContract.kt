@@ -12,6 +12,7 @@ interface IngredientListContract {
     interface Presenter : BasePresenter<View> {
         override fun attachView(view: View)
         fun setIngredientType(type: Type)
-        fun load()
+        fun subscribeToData()
+        fun refresh()
     }
 }

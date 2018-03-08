@@ -63,7 +63,7 @@ class IngredientListFragment : BaseFragment(), IngredientListContract.View {
 
         rv_rv.adapter = adapter
         rv_rv.layoutManager = GridLayoutManager(activity, 2)
-        rv_srl.setOnRefreshListener { presenter?.load() }
+        rv_srl.setOnRefreshListener { presenter?.refresh() }
 
         presenter?.setIngredientType(type)
         presenter?.start()
@@ -75,14 +75,14 @@ class IngredientListFragment : BaseFragment(), IngredientListContract.View {
     }
 
     override fun onClick(item: IngredientThumb, sharedElements: List<Pair<View, String>>?) {
-            ifAdded { abc->
-                //TODO picasso.load(item.imageUrl).fetch() prefetch large image
-                navigator.navigate(
-                    source = abc,
-                    target = IngredientDetailActivity::class.java,
+        ifAdded { abc ->
+            //TODO picasso.subscribeToData(item.imageUrl).fetch() prefetch large image
+            navigator.navigate(
+                source = abc,
+                target = IngredientDetailActivity::class.java,
                 //    sharedElements = sharedElements,
-                    bundle = IngredientDetailActivity.createBundle(item.id)
-                )
+                bundle = IngredientDetailActivity.createBundle(item.id)
+            )
         }
     }
 
@@ -108,6 +108,7 @@ class IngredientListFragment : BaseFragment(), IngredientListContract.View {
     }
 
     private fun onNewItem(data: List<IngredientThumb>) {
+     //   finishLoading()
         adapter.updateData(data)
     }
 

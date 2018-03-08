@@ -12,15 +12,15 @@ import org.junit.Test
 
 class WeatherLocalSourceTest {
 
-    lateinit var dataSource: WeatherLocalSource
-    lateinit var database: WeatherDatabase
+    lateinit var dataSource: LocalSourceImpl
+    lateinit var database: CocktailsDatabase
     lateinit var mapper: WeatherEntityMapper
 
     @Before
     fun setup() {
-        database = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(), WeatherDatabase::class.java).build()
+        database = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(), CocktailsDatabase::class.java).build()
         mapper = WeatherEntityMapper()
-        dataSource = WeatherLocalSource(database, mapper)
+        dataSource = LocalSourceImpl(database, mapper)
     }
 
     @After

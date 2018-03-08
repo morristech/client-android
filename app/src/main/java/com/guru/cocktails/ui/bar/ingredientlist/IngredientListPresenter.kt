@@ -2,12 +2,14 @@ package com.guru.cocktails.ui.bar.ingredientlist
 
 import com.guru.cocktails.di.scope.ViewScope
 import com.guru.cocktails.domain.interactor.definition.IngredientsUseCase
+import com.guru.cocktails.platform.extensions.getDisposableCompletableObserver
 import com.guru.cocktails.platform.extensions.getDisposableSubscriber
 import com.guru.cocktails.ui.bar.ingredientlist.IngredientListContract.View
-import com.guru.cocktails.ui.bar.ingredientlist.IngredientListViewState.*
+import com.guru.cocktails.ui.bar.ingredientlist.IngredientListViewState.Error
+import com.guru.cocktails.ui.bar.ingredientlist.IngredientListViewState.Success
 import com.guru.cocktails.ui.base.BasePresenterImpl
+import timber.log.Timber
 import javax.inject.Inject
-
 
 @ViewScope
 class IngredientListPresenter
@@ -24,23 +26,22 @@ class IngredientListPresenter
 
     override fun start() {
         super.start()
-        load()
+        subscribeToData()
+        refresh()
     }
 
     override fun setIngredientType(type: Type) {
         this.type = type
     }
 
-    override fun load() {
+    override fun subscribeToData() {
 
         val flowable = when (type) {
-            is Type.Alcoholic -> ingredientsUseCase.getAllAlcoholicIngredients()
+            is Type.Alcoholic    -> ingredientsUseCase.getAllAlcoholicIngredients()
             is Type.NonAlcoholic -> ingredientsUseCase.getAllNonAlcoholicIngredients()
         }
 
         val disposable = flowable
-            .doOnSubscribe { setViewState(Loading()) }
-            .doFinally { setViewState(LoadingFinished()) }
             .subscribeWith(
                 getDisposableSubscriber(
                     { setViewState(Success(it)) },
@@ -49,7 +50,24 @@ class IngredientListPresenter
         disposables.add(disposable)
     }
 
+    //TODO check if internet connection is present?
+    override fun refresh() {
+
+        val completable = when (type) {
+            is Type.Alcoholic    -> ingredientsUseCase.refreshAllAlcoholicIngredients()
+            is Type.NonAlcoholic -> ingredientsUseCase.refreshAllNonAlcoholicIngredients()
+        }
+
+        val disposable = completable
+            .doOnSubscribe { setViewState(IngredientListViewState.Loading()) }
+            .doFinally { setViewState(IngredientListViewState.LoadingFinished()) }
+            .subscribeWith(getDisposableCompletableObserver({ Timber.i("Refresh sucessfull") }))
+
+        disposables.add(disposable)
+    }
+
     private fun setViewState(state: IngredientListViewState) {
+        Timber.e(state.toString())
         view?.viewState = state
     }
 }

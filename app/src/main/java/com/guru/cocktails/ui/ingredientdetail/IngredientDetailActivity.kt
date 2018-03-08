@@ -78,14 +78,14 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
         collapsing_toolbar.title = "White rum"
 
         val cocktails = listOf(
-                IngredientThumb(1, "1", "1", 1.0),
-                IngredientThumb(1, "1", "1", 1.0),
-                IngredientThumb(1, "1", "1", 1.0),
-                IngredientThumb(1, "1", "1", 1.0),
-                IngredientThumb(1, "1", "1", 1.0),
-                IngredientThumb(1, "1", "1", 1.0),
-                IngredientThumb(1, "1", "1", 1.0),
-                IngredientThumb(1, "1", "1", 1.0)
+                IngredientThumb(1, "1", "1","1", 1.0),
+                IngredientThumb(1, "1", "1","1", 1.0),
+                IngredientThumb(1, "1", "1","1", 1.0),
+                IngredientThumb(1, "1", "1", "1",1.0),
+                IngredientThumb(1, "1", "1", "1",1.0),
+                IngredientThumb(1, "1", "1","1", 1.0),
+                IngredientThumb(1, "1", "1", "1",1.0),
+                IngredientThumb(1, "1", "1","1", 1.0)
         )
 
         val manager = GridLayoutManager(this, 2)

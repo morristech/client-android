@@ -3,13 +3,10 @@ package com.guru.cocktails.di.module
 import com.guru.cocktails.data.mapper.IngredientDetailMapper
 import com.guru.cocktails.data.mapper.IngredientThumbMapper
 import com.guru.cocktails.data.mapper.IngredientTypeMapper
-import com.guru.cocktails.data.mapper.WeatherEntityMapper
 import com.guru.cocktails.data.mapper.base.Mapper
-import com.guru.cocktails.data.source.local.model.WeatherEntity
 import com.guru.cocktails.data.source.remote.model.ingredient.IngredientDetailDto
 import com.guru.cocktails.data.source.remote.model.ingredient.IngredientThumbDto
 import com.guru.cocktails.data.source.remote.model.ingredient.IngredientTypeDto
-import com.guru.cocktails.domain.model.Weather
 import com.guru.cocktails.domain.model.ingredient.IngredientDetail
 import com.guru.cocktails.domain.model.ingredient.IngredientThumb
 import com.guru.cocktails.domain.model.ingredient.IngredientType
@@ -20,11 +17,6 @@ import javax.inject.Singleton
 @Module
 class MapperModule {
 
-    @Singleton
-    @Provides
-    internal fun weatherEntityMapper(mapper: WeatherEntityMapper): Mapper<Weather, WeatherEntity> {
-        return mapper
-    }
 
     @Singleton
     @Provides
