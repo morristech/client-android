@@ -9,4 +9,3 @@ gradlew.*
 captures/
 .externalNativeBuild
 config/
-secret.properties
