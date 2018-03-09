@@ -8,12 +8,12 @@ interface IngredientDetailContract {
     interface View : BaseView<Presenter>, IngredientListAdapter.Callbacks {
         override fun attachPresenter(presenter: Presenter)
         var detailViewState: IngredientDetailViewState
-        fun setTitle(djksbadfjsa:String)
     }
 
     interface Presenter : BasePresenter<View> {
         override fun attachView(view: View)
         fun setIngredientType(ingredientId: Int)
-        fun load()
+        fun subscribeToData()
+        fun refresh()
     }
 }

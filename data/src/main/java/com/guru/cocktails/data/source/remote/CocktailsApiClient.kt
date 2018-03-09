@@ -1,6 +1,6 @@
 package com.guru.cocktails.data.source.remote
 
-import com.guru.cocktails.data.source.remote.model.ingredient.IngredientDetailDto
+import com.guru.cocktails.data.source.remote.model.ingredient.IngredientDetailBundleDto
 import com.guru.cocktails.data.source.remote.model.ingredient.IngredientThumbDto
 import com.guru.cocktails.domain.model.ListBundle
 import com.guru.cocktails.domain.model.ingredient.Type
@@ -18,5 +18,5 @@ interface CocktailsApiClient {
     ): Single<ListBundle<IngredientThumbDto>>
 
     @GET("/ingredient/detail")
-    fun getIngredientDetail(@Query("id") id: Int): Single<IngredientDetailDto>
+    fun getIngredientDetail(@Query("id") id: Int): Single<IngredientDetailBundleDto>
 }

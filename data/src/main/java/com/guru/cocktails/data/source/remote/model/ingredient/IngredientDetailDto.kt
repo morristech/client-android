@@ -7,6 +7,6 @@ data class IngredientDetailDto(
     val description: String?,
     val imageName: String?,
     val numShowed: Int?,
-    val ingredientType: IngredientTypeDto?,
+    val ingredientCategoryType: IngredientTypeDto?,
     val voltage: Double?
 )

@@ -15,5 +15,7 @@ interface IngredientsUseCase {
 
     fun refreshAllNonAlcoholicIngredients(): Completable
 
-    fun getIngredientDetail(ingredientId: Int): Flowable<IngredientDetail>
+    fun getIngredientDetail(id: Int): Flowable<IngredientDetail>
+
+    fun refreshIngredientDetail(id: Int): Completable
 }

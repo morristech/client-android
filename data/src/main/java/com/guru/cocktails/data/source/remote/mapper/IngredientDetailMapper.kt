@@ -1,4 +1,4 @@
-package com.guru.cocktails.data.mapper
+package com.guru.cocktails.data.source.remote.mapper
 
 import com.guru.cocktails.data.mapper.base.Mapper
 import com.guru.cocktails.data.source.remote.model.ingredient.IngredientDetailDto
@@ -21,9 +21,10 @@ class IngredientDetailMapper
             name = name ?: EMPTY_STRING,
             nameGrouped = nameGrouped ?: EMPTY_STRING,
             description = description ?: EMPTY_STRING,
-            imageName = "${baseUrl}assets/ingred/full_1000/$imageName",
+            imageName = imageName ?: EMPTY_STRING,
+            imageUrl = "${baseUrl}assets/ingred/full/$imageName",
             numShowed = numShowed ?: INVALID_INT,
-            ingredientType = ingredientTypeMapper.map(ingredientType ?: IngredientTypeDto.EMPTY),
+            ingredientType = ingredientTypeMapper.map(ingredientCategoryType ?: IngredientTypeDto.EMPTY),
             voltage = voltage ?: INVALID_DOUBLE
         )
     }
@@ -36,7 +37,7 @@ class IngredientDetailMapper
             description = description,
             imageName = imageName,
             numShowed = numShowed,
-            ingredientType = ingredientTypeMapper.reverse(ingredientType),
+            ingredientCategoryType = ingredientTypeMapper.reverse(ingredientType),
             voltage = voltage
         )
     }

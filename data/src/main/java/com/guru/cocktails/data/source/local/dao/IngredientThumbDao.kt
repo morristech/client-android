@@ -18,5 +18,5 @@ interface IngredientThumbDao : BaseDao<IngredientThumbEntity> {
     fun getAllNonAlcoholic(): Flowable<List<IngredientThumbEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertOrReplace(list : List<IngredientThumbEntity>)
+    fun insertOrReplace(list: List<IngredientThumbEntity>)
 }

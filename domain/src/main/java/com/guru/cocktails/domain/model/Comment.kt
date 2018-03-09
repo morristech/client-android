@@ -1,18 +1,15 @@
 package com.guru.cocktails.domain.model
 
-import java.sql.Timestamp
+import java.time.LocalDateTime
 
 data class Comment(
     val id: Long,
-    val objectTypeID: Int,
-    val objectID: Long,
+    val objectForeignKey: Long,
     val objectName: String,
-    val objectImageFileName: String,
-    val userID: String,
     val content: String,
-    val numLikes: Int,
-    val numLikesDis: Int,
-    val createdAt: Timestamp,
-    val userImage: String,
-    val userName: String
+    var numLikes: Int,
+    var numDislikes: Int,
+    var isVisible: Boolean,
+    var updateTime: LocalDateTime,
+    var createdTime: LocalDateTime
 )
