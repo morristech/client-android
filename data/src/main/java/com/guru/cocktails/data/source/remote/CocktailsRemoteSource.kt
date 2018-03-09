@@ -2,7 +2,7 @@ package com.guru.cocktails.data.source.remote
 
 
 import com.guru.cocktails.data.source.RemoteSource
-import com.guru.cocktails.data.source.remote.model.ingredient.IngredientDetailDto
+import com.guru.cocktails.data.source.remote.model.ingredient.IngredientDetailBundleDto
 import com.guru.cocktails.data.source.remote.model.ingredient.IngredientThumbDto
 import com.guru.cocktails.domain.model.ListBundle
 import com.guru.cocktails.domain.model.ingredient.Type
@@ -26,7 +26,7 @@ constructor(retrofit: Retrofit) : RemoteSource {
         return client.getIngredientList(0, 1000, Type.NON_ALCO)
     }
 
-    override fun getIngredientDetail(ingredientId: Int): Single<IngredientDetailDto> {
+    override fun getIngredientDetail(ingredientId: Int): Single<IngredientDetailBundleDto> {
         return client.getIngredientDetail(ingredientId)
     }
 }

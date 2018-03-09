@@ -26,16 +26,12 @@ import kotlin.properties.Delegates
 class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
 
 
-    override fun setTitle(djksbadfjsa: String) {
-
-    }
-
     @Inject lateinit var presenter: IngredientDetailContract.Presenter
     private var ingredientId: Int = -1
     private var ingredientDetail: IngredientDetail? = null
 
     override var detailViewState: IngredientDetailViewState by Delegates.observable<IngredientDetailViewState>(
-            Init(), { _, _, new -> processStateChange(new) }
+        Init(), { _, _, new -> processStateChange(new) }
     )
 
     override fun layoutId() = R.layout.activity_ingredient
@@ -46,7 +42,7 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
     }
 
     override fun onDestroy() {
-        presenter?.stop()
+        presenter.stop()
         super.onDestroy()
     }
 
@@ -56,9 +52,6 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
             .applicationComponent(App.instance.appComponent())
             .build()
             .inject(this)
-
-        this.presenter = presenter
-        this.presenter?.attachView(this)
     }
 
     override fun extractArguments() {
@@ -72,20 +65,19 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
 
     override fun onViewsBound() {
 
-        presenter?.setIngredientType(ingredientId)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         collapsing_toolbar.title = "White rum"
 
         val cocktails = listOf(
-                IngredientThumb(1, "1", "1","1", 1.0),
-                IngredientThumb(1, "1", "1","1", 1.0),
-                IngredientThumb(1, "1", "1","1", 1.0),
-                IngredientThumb(1, "1", "1", "1",1.0),
-                IngredientThumb(1, "1", "1", "1",1.0),
-                IngredientThumb(1, "1", "1","1", 1.0),
-                IngredientThumb(1, "1", "1", "1",1.0),
-                IngredientThumb(1, "1", "1","1", 1.0)
+            IngredientThumb(1, "1", "1", "1", 1.0),
+            IngredientThumb(1, "1", "1", "1", 1.0),
+            IngredientThumb(1, "1", "1", "1", 1.0),
+            IngredientThumb(1, "1", "1", "1", 1.0),
+            IngredientThumb(1, "1", "1", "1", 1.0),
+            IngredientThumb(1, "1", "1", "1", 1.0),
+            IngredientThumb(1, "1", "1", "1", 1.0),
+            IngredientThumb(1, "1", "1", "1", 1.0)
         )
 
         val manager = GridLayoutManager(this, 2)
@@ -97,13 +89,13 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
 
         ai_ll_description.setOnClickListener { navigateToDescriptionDetail() }
 
-        presenter?.load()
+        presenter.setIngredientType(ingredientId)
+        presenter.start()
     }
 
     @Inject
     override fun attachPresenter(presenter: IngredientDetailContract.Presenter) {
-        this.presenter = presenter
-        this.presenter?.attachView(this)
+        this.presenter.attachView(this)
     }
 
     private fun processStateChange(new: IngredientDetailViewState) {
@@ -127,7 +119,7 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
 
     private fun onNewItem(item: IngredientDetail) {
         ingredientDetail = item
-        picasso.load(item.imageName).into(image)
+        picasso.load(item.imageUrl).into(image)
         collapsing_toolbar.title = item.name
         place_detail.text = item.description
     }
@@ -144,15 +136,15 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
     private fun navigateToDescriptionDetail() {
         ingredientDetail?.let {
             val pairs = listOf(
-                    Pair(place_detail as View, "description"),
-                    Pair(image as View, "image")
+                Pair(place_detail as View, "description"),
+                Pair(image as View, "image")
             )
             val bundle = DescriptionActivity.newBundle(
-                    DescriptionViewModel(
-                            it.name,
-                            it.description,
-                            it.imageName
-                    )
+                DescriptionViewModel(
+                    it.name,
+                    it.description,
+                    it.imageName
+                )
             )
             navigator.navigate(this, DescriptionActivity::class.java, bundle, pairs)
         } ?: Timber.e(IllegalStateException("Ingredient with id : $ingredientId was null"))

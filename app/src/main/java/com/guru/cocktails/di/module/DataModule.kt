@@ -7,6 +7,7 @@ import com.guru.cocktails.data.source.LocalSource
 import com.guru.cocktails.data.source.RemoteSource
 import com.guru.cocktails.data.source.local.CocktailsDatabase
 import com.guru.cocktails.data.source.local.LocalSourceImpl
+import com.guru.cocktails.data.source.local.mapper.IngredientDetailEntityMapper
 import com.guru.cocktails.data.source.local.mapper.IngredientThumbEntityMapper
 import com.guru.cocktails.data.source.remote.CocktailsRemoteSource
 import com.guru.cocktails.domain.repository.IngredientsRepository
@@ -32,9 +33,15 @@ class DataModule {
 
     @Provides
     @Singleton
-    internal fun provideLocalSource(db: CocktailsDatabase, ingredientThumbEntityMapper: IngredientThumbEntityMapper): LocalSource {
-        return LocalSourceImpl(db, ingredientThumbEntityMapper)
-    }
+    internal fun provideLocalSource(
+        db: CocktailsDatabase,
+        ingredientThumbEntityMapper: IngredientThumbEntityMapper,
+        ingredientDetailEntityMapper: IngredientDetailEntityMapper
+    ): LocalSource = LocalSourceImpl(
+        db = db,
+        ingredientThumbEntityMapper = ingredientThumbEntityMapper,
+        ingredientDetailEntityMapper = ingredientDetailEntityMapper
+    )
 
     @Provides
     @Singleton

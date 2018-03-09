@@ -41,13 +41,9 @@ class IngredientListPresenter
             is Type.NonAlcoholic -> ingredientsUseCase.getAllNonAlcoholicIngredients()
         }
 
-        val disposable = flowable
-            .subscribeWith(
-                getDisposableSubscriber(
-                    { setViewState(Success(it)) },
-                    { setViewState(Error(it)) })
-            )
-        disposables.add(disposable)
+        flowable
+            .subscribeWith(getDisposableSubscriber({ setViewState(Success(it)) }, { setViewState(Error(it)) }))
+            .also { disposables.add(it) }
     }
 
     //TODO check if internet connection is present?
@@ -58,12 +54,11 @@ class IngredientListPresenter
             is Type.NonAlcoholic -> ingredientsUseCase.refreshAllNonAlcoholicIngredients()
         }
 
-        val disposable = completable
+        completable
             .doOnSubscribe { setViewState(IngredientListViewState.Loading()) }
             .doFinally { setViewState(IngredientListViewState.LoadingFinished()) }
             .subscribeWith(getDisposableCompletableObserver({ Timber.i("Refresh sucessfull") }))
-
-        disposables.add(disposable)
+            .also { disposables.add(it) }
     }
 
     private fun setViewState(state: IngredientListViewState) {

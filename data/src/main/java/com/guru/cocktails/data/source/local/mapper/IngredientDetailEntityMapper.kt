@@ -1,7 +1,8 @@
-package com.guru.cocktails.data.source.remote.mapper
+package com.guru.cocktails.data.source.local.mapper
 
 import com.guru.cocktails.data.mapper.base.Mapper
-import com.guru.cocktails.data.source.remote.model.ingredient.IngredientDetailDto
+import com.guru.cocktails.data.source.local.model.IngredientDetailEntity
+import com.guru.cocktails.data.source.remote.mapper.IngredientTypeMapper
 import com.guru.cocktails.data.source.remote.model.ingredient.IngredientTypeDto
 import com.guru.cocktails.domain.model.ingredient.IngredientDetail
 import javax.inject.Inject
@@ -9,35 +10,36 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
-class IngredientDetailMapper
+class IngredientDetailEntityMapper
 @Inject constructor(
     private val ingredientTypeMapper: IngredientTypeMapper,
     @Named("baseUrl") private val baseUrl: String
-) : Mapper<IngredientDetail, IngredientDetailDto>() {
+) : Mapper<IngredientDetail, IngredientDetailEntity>() {
 
-    override fun map(from: IngredientDetailDto) = with(from) {
+    override fun map(from: IngredientDetailEntity) = with(from) {
         IngredientDetail(
-            id = id ?: INVALID_INT,
-            name = name ?: EMPTY_STRING,
-            nameGrouped = nameGrouped ?: EMPTY_STRING,
-            description = description ?: EMPTY_STRING,
-            imageName = imageName ?: EMPTY_STRING,
+            id = id,
+            name = name,
+            nameGrouped = nameGrouped,
+            description = description,
+            imageName = imageName,
             imageUrl = "${baseUrl}assets/ingred/full/$imageName",
-            numShowed = numShowed ?: INVALID_INT,
-            ingredientType = ingredientTypeMapper.map(ingredientCategoryType ?: IngredientTypeDto.EMPTY),
-            voltage = voltage ?: INVALID_DOUBLE
+            numShowed = numShowed,
+            ingredientType = ingredientTypeMapper.map(IngredientTypeDto(ingredientTypeId, ingredientTypeName)),
+            voltage = voltage
         )
     }
 
     override fun reverse(to: IngredientDetail) = with(to) {
-        IngredientDetailDto(
+        IngredientDetailEntity(
             id = id,
             name = name,
             nameGrouped = nameGrouped,
             description = description,
             imageName = imageName,
             numShowed = numShowed,
-            ingredientCategoryType = ingredientTypeMapper.reverse(ingredientType),
+            ingredientTypeId = ingredientType.id,
+            ingredientTypeName = ingredientType.name,
             voltage = voltage
         )
     }

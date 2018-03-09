@@ -22,5 +22,9 @@ interface IngredientsRepository {
     fun refreshAllNonAlcoholicIngredients(): Completable
 
     /* Ingredient Detail*/
-    fun getIngredientDetail(ingredientId: Int): Flowable<IngredientDetail>
+    fun getIngredientDetail(id: Int): Flowable<IngredientDetail>
+
+    fun saveIngredientDetail(item: IngredientDetail): Completable
+
+    fun refreshIngredientDetail(id: Int): Completable
 }
