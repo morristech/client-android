@@ -7,7 +7,9 @@ import io.reactivex.Single
 
 interface RemoteSource {
 
-    fun getIngredientList(): Single<ListBundle<IngredientThumbDto>>
+    fun getAlcoIngredientList(): Single<ListBundle<IngredientThumbDto>>
+
+    fun getNonAlcoIngredientList(): Single<ListBundle<IngredientThumbDto>>
 
     fun getIngredientDetail(ingredientId: Int): Single<IngredientDetailDto>
 }

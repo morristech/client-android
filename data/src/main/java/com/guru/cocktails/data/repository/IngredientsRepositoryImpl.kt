@@ -43,17 +43,13 @@ constructor(
 
     override fun saveAllNonAlcoholicIngredients(list: List<IngredientThumb>): Completable = localSource.saveIngredientsThumb(list)
 
-    //TODO remove  .map { it.filter { it.voltage > 0.0 } } once api return only desired items
     override fun refreshAllAlcoholicIngredients(): Completable = remoteSource
-        .getIngredientList()
-        .map { ingredientThumbMapper.map(it.ingredientList) }
-        .map { it.filter { it.voltage > 0.0 } }
+        .getAlcoIngredientList()
+        .map { ingredientThumbMapper.map(it.list) }
         .flatMapCompletable { saveAllAlcoholicIngredients(it) }
 
-    //TODO remove  .map { it.filter { it.voltage > 0.0 } } once api return only desired items
     override fun refreshAllNonAlcoholicIngredients(): Completable = remoteSource
-        .getIngredientList()
-        .map { ingredientThumbMapper.map(it.ingredientList) }
-        .map { it.filter { it.voltage == 0.0 } }
+        .getNonAlcoIngredientList()
+        .map { ingredientThumbMapper.map(it.list) }
         .flatMapCompletable { saveAllNonAlcoholicIngredients(it) }
 }

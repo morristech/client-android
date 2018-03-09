@@ -7,3 +7,5 @@ data class IngredientThumb(
     val name: String,
     val voltage: Double
 )
+
+enum class Type { ALCO, NON_ALCO }
