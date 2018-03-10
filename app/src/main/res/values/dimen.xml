@@ -34,13 +34,13 @@
   <dimen name="space_xxxl">56dp</dimen>
 
   <!--TEXT SIZE-->
-  <dimen name="text_xxs_10">10dp</dimen>
-  <dimen name="text_xs_12">12dp</dimen>
-  <dimen name="text_s_14">14dp</dimen>
-  <dimen name="text_m_16">16dp</dimen>
-  <dimen name="text_l_18">18dp</dimen>
-  <dimen name="text_xl_20">20dp</dimen>
-  <dimen name="text_xxl_24">24dp</dimen>
+  <dimen name="text_xxs_10">10sp</dimen>
+  <dimen name="text_xs_12">12sp</dimen>
+  <dimen name="text_s_14">14sp</dimen>
+  <dimen name="text_m_16">16sp</dimen>
+  <dimen name="text_l_18">18sp</dimen>
+  <dimen name="text_xl_20">20sp</dimen>
+  <dimen name="text_xxl_24">24sp</dimen>
 
   <!--STATIC ZONE-->
   <dimen name="static_space_normal">32dp</dimen>
