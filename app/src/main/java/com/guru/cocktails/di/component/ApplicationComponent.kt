@@ -5,6 +5,8 @@ import com.guru.cocktails.di.module.*
 import com.guru.cocktails.domain.executor.SchedulerProvider
 import com.guru.cocktails.domain.interactor.definition.CocktailsUseCase
 import com.guru.cocktails.domain.interactor.definition.IngredientsUseCase
+import com.guru.cocktails.domain.interactor.definition.MyIngredientsUseCase
+import com.guru.cocktails.domain.model.mapper.MyIngredientMapper
 import com.guru.cocktails.platform.analytics.AnalyticsManager
 import com.guru.cocktails.platform.bus.data.DataBus
 import com.guru.cocktails.platform.bus.event.EventBus
@@ -44,5 +46,7 @@ interface ApplicationComponent {
     fun dataBus(): DataBus
     fun analyticsManager(): AnalyticsManager
     fun ingredientsUseCase(): IngredientsUseCase
+    fun myIngredientsUseCase(): MyIngredientsUseCase
     fun cocktailsUseCase(): CocktailsUseCase
+    fun myIngredientMapper(): MyIngredientMapper
 }

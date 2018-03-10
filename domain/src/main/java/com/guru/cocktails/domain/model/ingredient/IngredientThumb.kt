@@ -10,4 +10,3 @@ data class IngredientThumb(
     val voltage: Double
 ) : BaseListItem(name, imageUrl)
 
-enum class Type { ALCO, NON_ALCO }

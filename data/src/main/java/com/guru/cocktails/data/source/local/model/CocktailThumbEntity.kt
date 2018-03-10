@@ -3,7 +3,7 @@ package com.guru.cocktails.data.source.local.model
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
-@Entity
+@Entity(tableName = TABLE_COCKTAIL_THUMB)
 data class CocktailThumbEntity(
     @PrimaryKey()
     val id: Int,
@@ -14,5 +14,5 @@ data class CocktailThumbEntity(
     val numOfFavorite: Int
 )
 
-const val TABLE_COCKTAIL_THUMB = "CocktailThumbEntity"
+const val TABLE_COCKTAIL_THUMB = "cocktail_lite"
 

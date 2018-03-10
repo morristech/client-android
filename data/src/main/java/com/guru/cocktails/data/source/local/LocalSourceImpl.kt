@@ -1,15 +1,10 @@
 package com.guru.cocktails.data.source.local
 
 import com.guru.cocktails.data.source.LocalSource
-import com.guru.cocktails.data.source.local.mapper.CocktailThumbEntityMapper
-import com.guru.cocktails.data.source.local.mapper.IngredientDetailEntityMapper
-import com.guru.cocktails.data.source.local.mapper.IngredientThumbEntityMapper
 import com.guru.cocktails.data.source.local.model.CocktailThumbEntity
 import com.guru.cocktails.data.source.local.model.IngredientDetailEntity
 import com.guru.cocktails.data.source.local.model.IngredientThumbEntity
-import com.guru.cocktails.domain.model.cocktail.CocktailThumb
-import com.guru.cocktails.domain.model.ingredient.IngredientDetail
-import com.guru.cocktails.domain.model.ingredient.IngredientThumb
+import com.guru.cocktails.data.source.local.model.MyIngredientEntity
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import javax.inject.Inject
@@ -19,38 +14,39 @@ import javax.inject.Singleton
 class LocalSourceImpl
 @Inject
 constructor(
-    private val db: CocktailsDatabase,
-    private val ingredientThumbEntityMapper: IngredientThumbEntityMapper,
-    private val ingredientDetailEntityMapper: IngredientDetailEntityMapper,
-    private val cocktailThumbEntityMapper: CocktailThumbEntityMapper
+    private val db: CocktailsDatabase
 ) : LocalSource {
 
     override fun getAllAlcoholic(): Flowable<List<IngredientThumbEntity>> = db.ingredientThumbDao().getAllAlcoholic()
 
     override fun getAllNonAlcoholic(): Flowable<List<IngredientThumbEntity>> = db.ingredientThumbDao().getAllNonAlcoholic()
 
-    override fun saveIngredientsThumb(item: List<IngredientThumb>): Completable {
-        return Completable.fromCallable {
-            val mapped = ingredientThumbEntityMapper.reverse(item)
-            db.ingredientThumbDao().insertOrReplace(mapped)
-        }
+    override fun saveIngredientsThumb(item: List<IngredientThumbEntity>): Completable = Completable.fromCallable {
+        db.ingredientThumbDao().insertOrReplace(item)
     }
 
     override fun getIngredientDetail(id: Int): Flowable<IngredientDetailEntity> = db.ingredientDetailDao().getById(id)
 
-    override fun saveIngredientDetail(item: IngredientDetail): Completable {
-        return Completable.fromCallable {
-            val mapped = ingredientDetailEntityMapper.reverse(item)
-            db.ingredientDetailDao().insert(mapped)
-        }
+    override fun saveIngredientDetail(item: IngredientDetailEntity): Completable = Completable.fromCallable {
+        db.ingredientDetailDao().insert(item)
     }
 
     override fun getCocktailsList(): Flowable<List<CocktailThumbEntity>> = db.cocktailThumbDao().getAllCocktails()
 
-    override fun saveCocktailsList(list: List<CocktailThumb>): Completable {
-        return Completable.fromCallable {
-            val mapped = cocktailThumbEntityMapper.reverse(list)
-            db.cocktailThumbDao().insertOrReplace(mapped)
-        }
+    override fun saveCocktailsList(list: List<CocktailThumbEntity>): Completable = Completable.fromCallable {
+        db.cocktailThumbDao().insertOrReplace(list)
+    }
+
+    override fun getMyIngredients(): Flowable<List<MyIngredientEntity>> = db.myIngredientDao().getMyIngredients()
+
+    override fun getMyIngredientById(ingredientId: Int): Flowable<MyIngredientEntity> =
+        db.myIngredientDao().getMyIngredientById(ingredientId)
+
+    override fun addMyIngredient(item: MyIngredientEntity): Completable = Completable.fromCallable {
+        db.myIngredientDao().insert(item)
+    }
+
+    override fun deleteMyIngredient(item: MyIngredientEntity): Completable = Completable.fromCallable {
+        db.myIngredientDao().delete(item)
     }
 }

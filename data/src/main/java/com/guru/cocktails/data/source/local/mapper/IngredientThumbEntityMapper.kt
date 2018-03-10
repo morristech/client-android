@@ -9,7 +9,9 @@ import javax.inject.Singleton
 
 @Singleton
 class IngredientThumbEntityMapper
-@Inject constructor(@Named("baseUrl") private val baseUrl: String) : Mapper<IngredientThumb, IngredientThumbEntity>() {
+@Inject constructor(
+    @Named("baseUrl") private val baseUrl: String
+) : Mapper<IngredientThumb, IngredientThumbEntity>() {
 
     override fun map(from: IngredientThumbEntity) = with(from) {
         IngredientThumb(
