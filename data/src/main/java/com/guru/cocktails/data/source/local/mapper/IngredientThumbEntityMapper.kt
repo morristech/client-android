@@ -1,7 +1,7 @@
 package com.guru.cocktails.data.source.local.mapper
 
-import com.guru.cocktails.data.mapper.base.Mapper
 import com.guru.cocktails.data.source.local.model.IngredientThumbEntity
+import com.guru.cocktails.domain.model.base.Mapper
 import com.guru.cocktails.domain.model.ingredient.IngredientThumb
 import javax.inject.Inject
 import javax.inject.Named

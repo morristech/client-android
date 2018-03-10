@@ -1,6 +1,6 @@
 package com.guru.cocktails.data.source.remote.mapper.ingredient
 
-import com.guru.cocktails.data.mapper.base.Mapper
+import com.guru.cocktails.domain.model.base.Mapper
 import com.guru.cocktails.data.source.remote.model.ingredient.IngredientTypeDto
 import com.guru.cocktails.domain.model.ingredient.IngredientType
 import javax.inject.Inject

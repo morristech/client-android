@@ -1,4 +1,4 @@
-package com.guru.cocktails.data.mapper.base
+package com.guru.cocktails.domain.model.base
 
 import java.util.*
 

@@ -3,6 +3,7 @@ package com.guru.cocktails.di.component
 import android.content.Context
 import com.guru.cocktails.di.module.*
 import com.guru.cocktails.domain.executor.SchedulerProvider
+import com.guru.cocktails.domain.interactor.definition.CocktailsUseCase
 import com.guru.cocktails.domain.interactor.definition.IngredientsUseCase
 import com.guru.cocktails.platform.analytics.AnalyticsManager
 import com.guru.cocktails.platform.bus.data.DataBus
@@ -18,13 +19,13 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = arrayOf(
-        DataModule::class,
-        MapperModule::class,
-        NetworkModule::class,
-        InteractorModule::class,
-        ApplicationModule::class
-    )
+    modules = [
+        (DataModule::class),
+        (MapperModule::class),
+        (NetworkModule::class),
+        (InteractorModule::class),
+        (ApplicationModule::class)
+    ]
 )
 interface ApplicationComponent {
 
@@ -43,4 +44,5 @@ interface ApplicationComponent {
     fun dataBus(): DataBus
     fun analyticsManager(): AnalyticsManager
     fun ingredientsUseCase(): IngredientsUseCase
+    fun cocktailsUseCase(): CocktailsUseCase
 }

@@ -1,32 +1,32 @@
-package com.guru.cocktails.data.source.remote.mapper.cocktail
+package com.guru.cocktails.data.source.local.mapper
 
+import com.guru.cocktails.data.source.local.model.CocktailThumbEntity
 import com.guru.cocktails.domain.model.base.Mapper
-import com.guru.cocktails.data.source.remote.model.cocktail.CocktailThumbDto
 import com.guru.cocktails.domain.model.cocktail.CocktailThumb
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
-class CocktailThumbMapper
+class CocktailThumbEntityMapper
 @Inject constructor(
     @Named("baseUrl") private val baseUrl: String
-) : Mapper<CocktailThumb, CocktailThumbDto>() {
+) : Mapper<CocktailThumb, CocktailThumbEntity>() {
 
-    override fun map(from: CocktailThumbDto) = with(from) {
+    override fun map(from: CocktailThumbEntity) = with(from) {
         CocktailThumb(
-            id = id ?: INVALID_INT,
-            name = name ?: EMPTY_STRING,
-            image = image ?: EMPTY_STRING,
+            id = id,
+            name = name,
+            image = image,
             imageUrl = "${baseUrl}assets/cock/thumb_300/$image",
-            alcoVolume = alcoVolume ?: INVALID_DOUBLE,
-            calculatedRating = calculatedRating ?: INVALID_DOUBLE,
-            numOfFavorite = numOfFavorite ?: 0
+            numOfFavorite = numOfFavorite,
+            calculatedRating = calculatedRating,
+            alcoVolume = alcoVolume
         )
     }
 
     override fun reverse(to: CocktailThumb) = with(to) {
-        CocktailThumbDto(
+        CocktailThumbEntity(
             id = id,
             name = name,
             image = image,

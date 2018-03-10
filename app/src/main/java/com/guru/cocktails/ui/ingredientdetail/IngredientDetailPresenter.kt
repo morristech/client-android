@@ -1,6 +1,6 @@
 package com.guru.cocktails.ui.ingredientdetail
 
-import com.guru.cocktails.data.mapper.base.Mapper
+import com.guru.cocktails.domain.model.base.Mapper
 import com.guru.cocktails.di.scope.ViewScope
 import com.guru.cocktails.domain.interactor.definition.IngredientsUseCase
 import com.guru.cocktails.platform.extensions.getDisposableCompletableObserver
