@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.Toast
 import com.guru.cocktails.App
 import com.guru.cocktails.R
-import com.guru.cocktails.data.mapper.base.Mapper
+import com.guru.cocktails.domain.model.base.Mapper
 import com.guru.cocktails.di.component.DaggerViewComponent
 import com.guru.cocktails.di.module.PresenterModule
 import com.guru.cocktails.domain.model.ingredient.IngredientDetail
