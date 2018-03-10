@@ -162,9 +162,55 @@
             android:textSize="12sp"/>
         </LinearLayout>
 
-
       </LinearLayout>
 
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#eaeaea"/>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:orientation="horizontal"
+          android:paddingBottom="10dp"
+          android:paddingTop="10dp">
+          <android.support.v7.widget.SwitchCompat
+            android:id="@+id/reminder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shopping list"/>
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:orientation="horizontal"
+          android:paddingBottom="10dp"
+          android:paddingTop="10dp">
+          <android.support.v7.widget.SwitchCompat
+            android:id="@+id/abc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MY Bar"/>
+        </LinearLayout>
+      </LinearLayout>
       <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
