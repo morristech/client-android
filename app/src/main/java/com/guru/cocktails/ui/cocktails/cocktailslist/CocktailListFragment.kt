@@ -26,7 +26,7 @@ import kotlin.properties.Delegates
 class CocktailListFragment : BaseFragment(), CocktailsListContract.View {
 
     private var presenter: Presenter? = null
-    private val adapter by lazyFast { IngredientListAdapter(this, picasso) }
+    private val adapter by lazyFast { CocktailListAdapter(this, picasso) }
 
     override var viewState: CocktailListViewState by Delegates.observable<CocktailListViewState>(
         Init(), { _, _, new -> processStateChange(new) })
@@ -62,7 +62,7 @@ class CocktailListFragment : BaseFragment(), CocktailsListContract.View {
         super.onDestroy()
     }
 
-    override fun onClick(item: IngredientThumb, sharedElements: List<Pair<View, String>>?) {
+    override fun onClick(item: CocktailThumb, sharedElements: List<Pair<View, String>>?) {
         ifAdded { abc ->
             //TODO picasso.subscribeToData(item.imageUrl).fetch() prefetch large image
             navigator.navigate(
