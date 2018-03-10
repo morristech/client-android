@@ -4,8 +4,8 @@ import com.guru.cocktails.data.source.LocalSource
 import com.guru.cocktails.data.source.RemoteSource
 import com.guru.cocktails.data.source.local.mapper.IngredientDetailEntityMapper
 import com.guru.cocktails.data.source.local.mapper.IngredientThumbEntityMapper
-import com.guru.cocktails.data.source.remote.mapper.IngredientDetailBundleMapper
-import com.guru.cocktails.data.source.remote.mapper.IngredientThumbMapper
+import com.guru.cocktails.data.source.remote.mapper.ingredient.IngredientDetailBundleMapper
+import com.guru.cocktails.data.source.remote.mapper.ingredient.IngredientThumbMapper
 import com.guru.cocktails.domain.model.ingredient.IngredientDetail
 import com.guru.cocktails.domain.model.ingredient.IngredientThumb
 import com.guru.cocktails.domain.repository.IngredientsRepository

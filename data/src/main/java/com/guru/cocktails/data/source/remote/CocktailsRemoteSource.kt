@@ -2,6 +2,7 @@ package com.guru.cocktails.data.source.remote
 
 
 import com.guru.cocktails.data.source.RemoteSource
+import com.guru.cocktails.data.source.remote.model.cocktail.CocktailThumbDto
 import com.guru.cocktails.data.source.remote.model.ingredient.IngredientDetailBundleDto
 import com.guru.cocktails.data.source.remote.model.ingredient.IngredientThumbDto
 import com.guru.cocktails.domain.model.ListBundle
@@ -17,6 +18,10 @@ class CocktailsRemoteSource
 constructor(retrofit: Retrofit) : RemoteSource {
 
     private val client: CocktailsApiClient = retrofit.create(CocktailsApiClient::class.java)
+
+    override fun getCocktailsList(): Single<ListBundle<CocktailThumbDto>> {
+        return client.getCocktailsList(149, 100)
+    }
 
     override fun getAlcoIngredientList(): Single<ListBundle<IngredientThumbDto>> {
         return client.getIngredientList(0, 1000, Type.ALCO)
