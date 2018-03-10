@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
   <dimen name="activity_horizontal_margin">16dp</dimen>
   <dimen name="activity_vertical_margin">16dp</dimen>
   <dimen name="card_height">304dp</dimen>
@@ -18,4 +19,53 @@
   <dimen name="card_image_height">200dp</dimen>
   <dimen name="list_body">14sp</dimen>
   <dimen name="navheader_height">222dp</dimen>
+
+  <!--DEFAULT SPACE-->
+  <dimen name="space_zero">0dp</dimen>
+  <dimen name="space_xxs">2dp</dimen>
+  <dimen name="space_xs_minus">4dp</dimen>
+  <dimen name="space_xs">4dp</dimen>
+  <dimen name="space_s_minus">8dp</dimen>
+  <dimen name="space_s">16dp</dimen>
+  <dimen name="space_m">24dp</dimen>
+  <dimen name="space_l">32dp</dimen>
+  <dimen name="space_xl">40dp</dimen>
+  <dimen name="space_xxl">48dp</dimen>
+  <dimen name="space_xxxl">56dp</dimen>
+
+  <!--TEXT SIZE-->
+  <dimen name="text_xxs_10">10sp</dimen>
+  <dimen name="text_xs_12">12sp</dimen>
+  <dimen name="text_s_14">14sp</dimen>
+  <dimen name="text_m_16">16sp</dimen>
+  <dimen name="text_l_18">18sp</dimen>
+  <dimen name="text_xl_20">20sp</dimen>
+  <dimen name="text_xxl_24">24sp</dimen>
+
+  <!--STATIC ZONE-->
+  <dimen name="static_space_normal">32dp</dimen>
+  <dimen name="static_space_small">16dp</dimen>
+  <dimen name="static_space_medium">42dp</dimen>
+
+  <!--ICON SIZE-->
+  <dimen name="icon_small">20dp</dimen>
+  <dimen name="icon_medium">24dp</dimen>
+  <dimen name="icon_float">52dp</dimen>
+  <dimen name="icon_large">70dp</dimen>
+  <dimen name="icon_header">80dp</dimen>
+
+  <!--PADDING-->
+  <dimen name="padding_xxs_2">2dp</dimen>
+
+  <!--ROUNDED BUTTON-->
+  <dimen name="radius_xs_12">12dp</dimen>
+  <dimen name="radius_s_21">21dp</dimen>
+  <dimen name="radius_m_28">28dp</dimen>
+  <dimen name="stroke">2dp</dimen>
+
+  <!--DIVIDERS-->
+  <dimen name="divider_width">192dp</dimen>
+  <dimen name="divider_height_thick">2dp</dimen>
+  <dimen name="divider_height_thin">1dp</dimen>
+
 </resources>
