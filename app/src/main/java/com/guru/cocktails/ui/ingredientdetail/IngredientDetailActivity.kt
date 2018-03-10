@@ -143,7 +143,7 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
                 DescriptionViewModel(
                     it.name,
                     it.description,
-                    it.imageName
+                    it.imageUrl
                 )
             )
             navigator.navigate(this, DescriptionActivity::class.java, bundle, pairs)
