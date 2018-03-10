@@ -11,6 +11,7 @@ import com.guru.cocktails.ui.bar.ingredientlist.IngredientListFragment
 import com.guru.cocktails.ui.bar.ingredientlist.Type
 import com.guru.cocktails.ui.base.BaseFragment
 import com.guru.cocktails.ui.base.SectionsPagerAdapter
+import com.guru.cocktails.ui.cocktails.cocktailslist.CocktailListFragment
 import com.guru.cocktails.ui.cocktails.holder.CocktailsHolderContract.Presenter
 import kotlinx.android.synthetic.main.fragment_tabs.*
 import javax.inject.Inject
@@ -56,7 +57,7 @@ class CocktailsHolderFragment : BaseFragment(), CocktailsHolderContract.View {
         val adapter = SectionsPagerAdapter(childFragmentManager)
         val alcoBundle = IngredientListFragment.createBundle(Type.Alcoholic())
 
-        adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "INTRO")
+        adapter.addFragment(CocktailListFragment.newInstance(), "INTRO")
         adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "IBA")
         adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "TOP 100")
         adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "PACKAGES")
