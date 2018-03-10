@@ -1,8 +1,8 @@
 package com.guru.cocktails.di.module
 
-import com.guru.cocktails.data.source.remote.mapper.IngredientDetailMapper
-import com.guru.cocktails.data.source.remote.mapper.IngredientThumbMapper
-import com.guru.cocktails.data.source.remote.mapper.IngredientTypeMapper
+import com.guru.cocktails.data.source.remote.mapper.ingredient.IngredientDetailMapper
+import com.guru.cocktails.data.source.remote.mapper.ingredient.IngredientThumbMapper
+import com.guru.cocktails.data.source.remote.mapper.ingredient.IngredientTypeMapper
 import com.guru.cocktails.data.mapper.base.Mapper
 import com.guru.cocktails.data.source.remote.model.ingredient.IngredientDetailDto
 import com.guru.cocktails.data.source.remote.model.ingredient.IngredientThumbDto

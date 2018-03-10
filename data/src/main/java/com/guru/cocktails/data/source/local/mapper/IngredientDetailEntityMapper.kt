@@ -2,7 +2,7 @@ package com.guru.cocktails.data.source.local.mapper
 
 import com.guru.cocktails.data.mapper.base.Mapper
 import com.guru.cocktails.data.source.local.model.IngredientDetailEntity
-import com.guru.cocktails.data.source.remote.mapper.IngredientTypeMapper
+import com.guru.cocktails.data.source.remote.mapper.ingredient.IngredientTypeMapper
 import com.guru.cocktails.data.source.remote.model.ingredient.IngredientTypeDto
 import com.guru.cocktails.domain.model.ingredient.IngredientDetail
 import javax.inject.Inject

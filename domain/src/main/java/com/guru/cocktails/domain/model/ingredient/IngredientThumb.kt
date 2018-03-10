@@ -1,11 +1,13 @@
 package com.guru.cocktails.domain.model.ingredient
 
+import com.guru.cocktails.domain.model.base.BaseListItem
+
 data class IngredientThumb(
     val id: Int,
+    override val name: String,
     val imageName: String,
-    val imageUrl: String,
-    val name: String,
+    override val imageUrl: String,
     val voltage: Double
-)
+) : BaseListItem(name, imageUrl)
 
 enum class Type { ALCO, NON_ALCO }
