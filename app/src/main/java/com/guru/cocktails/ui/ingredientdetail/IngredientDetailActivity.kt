@@ -8,11 +8,12 @@ import android.view.View
 import android.widget.Toast
 import com.guru.cocktails.App
 import com.guru.cocktails.R
-import com.guru.cocktails.domain.model.base.Mapper
 import com.guru.cocktails.di.component.DaggerViewComponent
 import com.guru.cocktails.di.module.PresenterModule
+import com.guru.cocktails.domain.model.base.Mapper
 import com.guru.cocktails.domain.model.ingredient.IngredientDetail
 import com.guru.cocktails.domain.model.ingredient.IngredientThumb
+import com.guru.cocktails.domain.model.ingredient.MyIngredient
 import com.guru.cocktails.ui.bar.ingredientlist.IngredientListAdapter
 import com.guru.cocktails.ui.base.BaseActivity
 import com.guru.cocktails.ui.description.DescriptionActivity
@@ -24,7 +25,6 @@ import javax.inject.Inject
 import kotlin.properties.Delegates
 
 class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
-
 
     @Inject lateinit var presenter: IngredientDetailContract.Presenter
     private var ingredientId: Int = -1
@@ -89,6 +89,20 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
 
         ai_ll_description.setOnClickListener { navigateToDescriptionDetail() }
 
+        ai_s_my_bar.setOnCheckedChangeListener({ _, checked ->
+            when (checked) {
+                true  -> presenter.addToMyBar()
+                false -> presenter.removeFromMyBar()
+            }
+        })
+
+        ai_s_shopping_list.setOnCheckedChangeListener({ _, checked ->
+            when (checked) {
+                true  -> presenter.addToShoppingList()
+                false -> presenter.removeFromShoppingList()
+            }
+        })
+
         presenter.setIngredientType(ingredientId)
         presenter.start()
     }
@@ -100,11 +114,12 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
 
     private fun processStateChange(new: IngredientDetailViewState) {
         return when (new) {
-            is Init            -> initialize()
-            is Loading         -> loading()
-            is Success         -> onNewItem(new.item)
-            is Error           -> onError(new.error)
-            is LoadingFinished -> finishLoading()
+            is Init               -> initialize()
+            is Loading            -> loading()
+            is Success            -> onNewItem(new.item)
+            is Error              -> onError(new.error)
+            is LoadingFinished    -> finishLoading()
+            is MyIngredientUpdate -> onMyIngredientUpdate(new.item)
         }
     }
 
@@ -122,6 +137,11 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
         picasso.load(item.imageUrl).into(image)
         collapsing_toolbar.title = item.name
         place_detail.text = item.description
+    }
+
+    private fun onMyIngredientUpdate(item: MyIngredient) {
+        ai_s_my_bar.isChecked = item.myBar
+        ai_s_shopping_list.isChecked = item.shoppingCart
     }
 
     private fun onError(e: Throwable) {

@@ -3,7 +3,7 @@ package com.guru.cocktails.data.source.local.model
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
-@Entity
+@Entity(tableName = TABLE_INGREDIENT)
 data class IngredientDetailEntity(
     @PrimaryKey()
     val id: Int,
@@ -17,5 +17,5 @@ data class IngredientDetailEntity(
     val voltage: Double
 )
 
-const val TABLE_INGREDIENT = "IngredientDetailEntity"
+const val TABLE_INGREDIENT = "ingredient"
 

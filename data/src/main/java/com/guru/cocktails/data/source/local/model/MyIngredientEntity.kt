@@ -6,11 +6,13 @@ import android.arch.persistence.room.PrimaryKey
 @Entity(tableName = TABLE_MY_INGREDIENT)
 data class MyIngredientEntity(
     @PrimaryKey()
-    val id: Int,
+    val ingredientId: Int,
+    val name: String,
     val imageName: String,
+    val voltage: Double,
     val myBar: Boolean,
     val shoppingCart: Boolean
 )
 
-const val TABLE_MY_INGREDIENT = "my_ingredients"
+const val TABLE_MY_INGREDIENT = "ingredient_bar"
 

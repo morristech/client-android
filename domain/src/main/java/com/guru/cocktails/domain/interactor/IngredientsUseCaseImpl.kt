@@ -18,33 +18,39 @@ constructor(
     private val repository: IngredientsRepository
 ) : IngredientsUseCase {
 
-    override fun getAllAlcoholicIngredients(): Flowable<List<IngredientThumb>> = repository
-        .getAllAlcoholicIngredients()
-        .subscribeOn(schedulerProvider.io())
-        .observeOn(schedulerProvider.ui())
+    override fun getAllAlcoholicIngredients(): Flowable<List<IngredientThumb>> =
+        repository
+            .getAllAlcoholicIngredients()
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
 
-    override fun refreshAllAlcoholicIngredients(): Completable = repository
-        .refreshAllAlcoholicIngredients()
-        .subscribeOn(schedulerProvider.io())
-        .observeOn(schedulerProvider.ui())
+    override fun refreshAllAlcoholicIngredients(): Completable =
+        repository
+            .refreshAllAlcoholicIngredients()
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
 
-    override fun getAllNonAlcoholicIngredients(): Flowable<List<IngredientThumb>> = repository
-        .getAllNonAlcoholicIngredients()
-        .subscribeOn(schedulerProvider.io())
-        .observeOn(schedulerProvider.ui())
+    override fun getAllNonAlcoholicIngredients(): Flowable<List<IngredientThumb>> =
+        repository
+            .getAllNonAlcoholicIngredients()
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
 
-    override fun refreshAllNonAlcoholicIngredients(): Completable = repository
-        .refreshAllNonAlcoholicIngredients()
-        .subscribeOn(schedulerProvider.io())
-        .observeOn(schedulerProvider.ui())
+    override fun refreshAllNonAlcoholicIngredients(): Completable =
+        repository
+            .refreshAllNonAlcoholicIngredients()
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
 
-    override fun getIngredientDetail(id: Int): Flowable<IngredientDetail> = repository
-        .getIngredientDetail(id)
-        .subscribeOn(schedulerProvider.io())
-        .observeOn(schedulerProvider.ui())
+    override fun getIngredientDetail(id: Int): Flowable<IngredientDetail> =
+        repository
+            .getIngredientDetail(id)
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
 
-    override fun refreshIngredientDetail(id: Int): Completable = repository
-        .refreshIngredientDetail(id)
-        .subscribeOn(schedulerProvider.io())
-        .observeOn(schedulerProvider.ui())
+    override fun refreshIngredientDetail(id: Int): Completable =
+        repository
+            .refreshIngredientDetail(id)
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
 }

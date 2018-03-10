@@ -21,14 +21,18 @@ constructor(
     private val cocktailThumbEntityMapper: CocktailThumbEntityMapper
 ) : CocktailsRepository {
 
-    override fun getCocktailsList(): Flowable<List<CocktailThumb>> = localSource
-        .getCocktailsList()
-        .map { cocktailThumbEntityMapper.map(it) }
+    override fun getCocktailsList(): Flowable<List<CocktailThumb>> =
+        localSource
+            .getCocktailsList()
+            .map { cocktailThumbEntityMapper.map(it) }
 
-    override fun saveCocktailsList(list: List<CocktailThumb>): Completable = localSource.saveCocktailsList(list)
+    override fun saveCocktailsList(list: List<CocktailThumb>): Completable =
+        localSource
+            .saveCocktailsList(cocktailThumbEntityMapper.reverse(list))
 
-    override fun refreshCocktailsList(): Completable = remoteSource
-        .getCocktailsList()
-        .map { cocktailThumbMapper.map(it.list) }
-        .flatMapCompletable { saveCocktailsList(it) }
+    override fun refreshCocktailsList(): Completable =
+        remoteSource
+            .getCocktailsList()
+            .map { cocktailThumbMapper.map(it.list) }
+            .flatMapCompletable { saveCocktailsList(it) }
 }

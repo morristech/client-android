@@ -17,13 +17,15 @@ constructor(
     private val repository: CocktailsRepository
 ) : CocktailsUseCase {
 
-    override fun getCocktailsList(): Flowable<List<CocktailThumb>> = repository
-        .getCocktailsList()
-        .subscribeOn(schedulerProvider.io())
-        .observeOn(schedulerProvider.ui())
+    override fun getCocktailsList(): Flowable<List<CocktailThumb>> =
+        repository
+            .getCocktailsList()
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
 
-    override fun refreshCocktailsList(): Completable = repository
-        .refreshCocktailsList()
-        .subscribeOn(schedulerProvider.io())
-        .observeOn(schedulerProvider.ui())
+    override fun refreshCocktailsList(): Completable =
+        repository
+            .refreshCocktailsList()
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
 }

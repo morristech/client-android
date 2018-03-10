@@ -27,41 +27,58 @@ constructor(
 ) : IngredientsRepository {
 
     /* Ingredients List Alcoholic*/
-    override fun getAllAlcoholicIngredients(): Flowable<List<IngredientThumb>> = localSource
-        .getAllAlcoholic()
-        .map { ingredientThumbEntityMapper.map(it) }
-        .map { it.sortedBy { it.name } }
+    override fun getAllAlcoholicIngredients(): Flowable<List<IngredientThumb>> =
+        localSource
+            .getAllAlcoholic()
+            .map { ingredientThumbEntityMapper.map(it) }
+            .map { it.sortedBy { it.name } }
 
-    override fun saveAllAlcoholicIngredients(list: List<IngredientThumb>): Completable = localSource.saveIngredientsThumb(list)
+    override fun saveAllAlcoholicIngredients(list: List<IngredientThumb>): Completable =
+        ingredientThumbEntityMapper
+            .reverse(list)
+            .let { localSource.saveIngredientsThumb(it) }
 
-    override fun refreshAllAlcoholicIngredients(): Completable = remoteSource
-        .getAlcoIngredientList()
-        .map { ingredientThumbMapper.map(it.list) }
-        .flatMapCompletable { saveAllAlcoholicIngredients(it) }
+
+    override fun refreshAllAlcoholicIngredients(): Completable =
+        remoteSource
+            .getAlcoIngredientList()
+            .map { ingredientThumbMapper.map(it.list) }
+            .flatMapCompletable { saveAllAlcoholicIngredients(it) }
 
     /* Ingredients List Non Alcoholic*/
-    override fun getAllNonAlcoholicIngredients(): Flowable<List<IngredientThumb>> = localSource
-        .getAllNonAlcoholic()
-        .map { ingredientThumbEntityMapper.map(it) }
-        .map { it.sortedBy { it.name } }
+    override fun getAllNonAlcoholicIngredients(): Flowable<List<IngredientThumb>> =
+        localSource
+            .getAllNonAlcoholic()
+            .map { ingredientThumbEntityMapper.map(it) }
+            .map { it.sortedBy { it.name } }
 
-    override fun saveAllNonAlcoholicIngredients(list: List<IngredientThumb>): Completable = localSource.saveIngredientsThumb(list)
+    override fun saveAllNonAlcoholicIngredients(list: List<IngredientThumb>): Completable =
+        ingredientThumbEntityMapper
+            .reverse(list)
+            .let { localSource.saveIngredientsThumb(it) }
 
-    override fun refreshAllNonAlcoholicIngredients(): Completable = remoteSource
-        .getNonAlcoIngredientList()
-        .map { ingredientThumbMapper.map(it.list) }
-        .flatMapCompletable { saveAllNonAlcoholicIngredients(it) }
+
+    override fun refreshAllNonAlcoholicIngredients(): Completable =
+        remoteSource
+            .getNonAlcoIngredientList()
+            .map { ingredientThumbMapper.map(it.list) }
+            .flatMapCompletable { saveAllNonAlcoholicIngredients(it) }
 
 
     /* Ingredient Detail*/
-    override fun getIngredientDetail(id: Int): Flowable<IngredientDetail> = localSource
-        .getIngredientDetail(id)
-        .map { ingredientDetailEntityMapper.map(it) }
+    override fun getIngredientDetail(id: Int): Flowable<IngredientDetail> =
+        localSource
+            .getIngredientDetail(id)
+            .map { ingredientDetailEntityMapper.map(it) }
 
-    override fun saveIngredientDetail(item: IngredientDetail): Completable = localSource.saveIngredientDetail(item)
+    override fun saveIngredientDetail(item: IngredientDetail): Completable =
+        ingredientDetailEntityMapper
+            .reverse(item)
+            .let { localSource.saveIngredientDetail(it) }
 
-    override fun refreshIngredientDetail(id: Int): Completable = remoteSource
-        .getIngredientDetail(id)
-        .map { ingredientDetailBundleMapper.map(it) }
-        .flatMapCompletable { saveIngredientDetail(it) }
+    override fun refreshIngredientDetail(id: Int): Completable =
+        remoteSource
+            .getIngredientDetail(id)
+            .map { ingredientDetailBundleMapper.map(it) }
+            .flatMapCompletable { saveIngredientDetail(it) }
 }
