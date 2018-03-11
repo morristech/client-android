@@ -16,7 +16,7 @@ class IngredientDetailModule(private val ingredientId: Int) {
     @ViewScope
     @Provides
     @Named("ingredientId")
-    internal fun context(): Int {
+    internal fun ingredientId(): Int {
         return ingredientId
     }
 
