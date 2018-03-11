@@ -24,7 +24,7 @@ abstract class BaseListAdapter<ListItem : BaseListItem>(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(parent.inflate(getListItemLayout()))
 
-    open fun getListItemLayout() = R.layout.item_coctail_grid
+    open fun getListItemLayout() = R.layout.base__thumb_item
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bindView(items[position])
 
