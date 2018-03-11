@@ -1,15 +1,15 @@
 package com.guru.cocktails.ui.bar.holder
 
 import com.guru.cocktails.ui.bar.ingredientlist.IngredientListFragment
-import com.guru.cocktails.ui.bar.ingredientlist.Type
+import com.guru.cocktails.ui.bar.ingredientlist.IngredientListType
 import com.guru.cocktails.ui.base.BaseHolderFragment
 
 class BarHolderFragment : BaseHolderFragment() {
 
     override fun addFragments() {
 
-        val alcoBundle = IngredientListFragment.createBundle(Type.Alcoholic())
-        val alcoNonBundle = IngredientListFragment.createBundle(Type.NonAlcoholic())
+        val alcoBundle = IngredientListFragment.createBundle(IngredientListType.Alcoholic())
+        val alcoNonBundle = IngredientListFragment.createBundle(IngredientListType.NonAlcoholic())
 
         adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "INTRO")
         adapter.addFragment(IngredientListFragment.newInstance(alcoBundle), "MY COCKTAILS")

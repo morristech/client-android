@@ -15,7 +15,7 @@ open class BaseHolderFragment : BaseFragment() {
 
     override fun layoutId() = R.layout.fragment_tabs
 
-    override fun initializeDependencies() {
+    override fun inject() {
         App.instance.appComponent()
     }
 
