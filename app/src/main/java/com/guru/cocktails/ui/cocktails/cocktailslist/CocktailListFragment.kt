@@ -10,10 +10,8 @@ import com.guru.cocktails.R
 import com.guru.cocktails.di.component.DaggerViewComponent
 import com.guru.cocktails.di.module.PresenterModule
 import com.guru.cocktails.domain.model.cocktail.CocktailThumb
-import com.guru.cocktails.domain.model.ingredient.IngredientThumb
 import com.guru.cocktails.platform.extensions.ifAdded
 import com.guru.cocktails.platform.extensions.lazyFast
-import com.guru.cocktails.ui.bar.ingredientlist.IngredientListAdapter
 import com.guru.cocktails.ui.base.BaseFragment
 import com.guru.cocktails.ui.cocktails.cocktailslist.CocktailListViewState.*
 import com.guru.cocktails.ui.cocktails.cocktailslist.CocktailsListContract.Presenter
@@ -96,7 +94,7 @@ class CocktailListFragment : BaseFragment(), CocktailsListContract.View {
     }
 
     private fun onNewItem(data: List<CocktailThumb>) {
-        //  adapter.updateData(data)
+        adapter.updateData(data)
     }
 
     private fun onError(e: Throwable) {
