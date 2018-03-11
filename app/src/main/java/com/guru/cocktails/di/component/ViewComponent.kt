@@ -7,7 +7,6 @@ import com.guru.cocktails.ui.bar.holder.BarHolderFragment
 import com.guru.cocktails.ui.bar.ingredientlist.IngredientListFragment
 import com.guru.cocktails.ui.cocktails.cocktailslist.CocktailListFragment
 import com.guru.cocktails.ui.cocktails.holder.CocktailsHolderFragment
-import com.guru.cocktails.ui.ingredientdetail.IngredientDetailActivity
 import dagger.Component
 
 @ViewScope
@@ -24,7 +23,6 @@ interface ViewComponent {
     fun inject(item: AcademyHolderFragment)
     fun inject(item: IngredientListFragment)
     fun inject(item: CocktailListFragment)
-    fun inject(item: IngredientDetailActivity)
 
     fun inject(item: CocktailsHolderFragment)
     fun inject(item: BarHolderFragment)
