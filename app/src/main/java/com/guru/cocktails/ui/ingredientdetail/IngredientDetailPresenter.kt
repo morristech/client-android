@@ -3,7 +3,6 @@ package com.guru.cocktails.ui.ingredientdetail
 import com.guru.cocktails.di.scope.ViewScope
 import com.guru.cocktails.domain.interactor.definition.IngredientsUseCase
 import com.guru.cocktails.domain.interactor.definition.MyIngredientsUseCase
-import com.guru.cocktails.domain.model.base.Mapper
 import com.guru.cocktails.domain.model.ingredient.IngredientDetail
 import com.guru.cocktails.domain.model.ingredient.MyIngredient
 import com.guru.cocktails.domain.model.mapper.MyIngredientMapper
@@ -20,11 +19,11 @@ class IngredientDetailPresenter
 @Inject constructor(
     private val ingredientsUseCase: IngredientsUseCase,
     private val myIngredientsUseCase: MyIngredientsUseCase,
-    private val myIngredientMapper: MyIngredientMapper
+    private val myIngredientMapper: MyIngredientMapper,
+    private val ingredientId: Int
 ) : BasePresenterImpl(), IngredientDetailContract.Presenter {
 
     private var view: View? = null
-    private var ingredientId: Int = Mapper.INVALID_INT
     private var ingredient: IngredientDetail? = null
     private var myIngredient: MyIngredient? = null
 
@@ -36,10 +35,6 @@ class IngredientDetailPresenter
         super.start()
         subscribeToData()
         refresh()
-    }
-
-    override fun setIngredientType(ingredientId: Int) {
-        this.ingredientId = ingredientId
     }
 
     override fun refresh() {

@@ -3,8 +3,6 @@ package com.guru.cocktails.di.module
 import com.guru.cocktails.di.scope.ViewScope
 import com.guru.cocktails.domain.interactor.definition.CocktailsUseCase
 import com.guru.cocktails.domain.interactor.definition.IngredientsUseCase
-import com.guru.cocktails.domain.interactor.definition.MyIngredientsUseCase
-import com.guru.cocktails.domain.model.mapper.MyIngredientMapper
 import com.guru.cocktails.ui.academy.holder.AcademyHolderContract
 import com.guru.cocktails.ui.academy.holder.AcademyHolderPresenter
 import com.guru.cocktails.ui.bar.holder.BarHolderContract
@@ -15,27 +13,11 @@ import com.guru.cocktails.ui.cocktails.cocktailslist.CocktailListPresenter
 import com.guru.cocktails.ui.cocktails.cocktailslist.CocktailsListContract
 import com.guru.cocktails.ui.cocktails.holder.CocktailsHolderContract
 import com.guru.cocktails.ui.cocktails.holder.CocktailsHolderPresenter
-import com.guru.cocktails.ui.ingredientdetail.IngredientDetailContract
-import com.guru.cocktails.ui.ingredientdetail.IngredientDetailPresenter
 import dagger.Module
 import dagger.Provides
 
 @Module
 class PresenterModule {
-
-    @ViewScope
-    @Provides
-    internal fun ingredientPresenter(
-        ingredientsUseCase: IngredientsUseCase,
-        myIngredientsUseCase: MyIngredientsUseCase,
-        myIngredientMapper: MyIngredientMapper
-    ): IngredientDetailContract.Presenter {
-        return IngredientDetailPresenter(
-            ingredientsUseCase = ingredientsUseCase,
-            myIngredientMapper = myIngredientMapper,
-            myIngredientsUseCase = myIngredientsUseCase
-        )
-    }
 
     @ViewScope
     @Provides

@@ -8,8 +8,6 @@ import android.view.View
 import android.widget.Toast
 import com.guru.cocktails.App
 import com.guru.cocktails.R
-import com.guru.cocktails.di.component.DaggerViewComponent
-import com.guru.cocktails.di.module.PresenterModule
 import com.guru.cocktails.domain.model.base.Mapper
 import com.guru.cocktails.domain.model.ingredient.IngredientDetail
 import com.guru.cocktails.domain.model.ingredient.IngredientThumb
@@ -19,6 +17,8 @@ import com.guru.cocktails.ui.base.BaseActivity
 import com.guru.cocktails.ui.description.DescriptionActivity
 import com.guru.cocktails.ui.description.DescriptionViewModel
 import com.guru.cocktails.ui.ingredientdetail.IngredientDetailViewState.*
+import com.guru.cocktails.ui.ingredientdetail.di.DaggerIngredientDetailComponent
+import com.guru.cocktails.ui.ingredientdetail.di.IngredientDetailModule
 import kotlinx.android.synthetic.main.activity_ingredient.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -47,8 +47,8 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
     }
 
     override fun inject() {
-        DaggerViewComponent.builder()
-            .presenterModule(PresenterModule())
+        DaggerIngredientDetailComponent.builder()
+            .ingredientDetailModule(IngredientDetailModule(ingredientId))
             .applicationComponent(App.instance.appComponent())
             .build()
             .inject(this)
@@ -103,7 +103,6 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
             }
         })
 
-        presenter.setIngredientType(ingredientId)
         presenter.start()
     }
 
