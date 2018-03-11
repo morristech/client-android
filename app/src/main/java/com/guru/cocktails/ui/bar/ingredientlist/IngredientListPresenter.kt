@@ -11,11 +11,11 @@ import javax.inject.Inject
 @ViewScope
 class IngredientListPresenter
 @Inject constructor(
-    private val ingredientsUseCase: IngredientsUseCase
+    private val ingredientsUseCase: IngredientsUseCase,
+    private val ingredientListType: IngredientListType
 ) : BasePresenterImpl(), IngredientListContract.Presenter {
 
     private var view: IngredientListContract.View? = null
-    private lateinit var type: Type
 
     override fun attachView(view: IngredientListContract.View) {
         this.view = checkNotNull(view)
@@ -27,15 +27,11 @@ class IngredientListPresenter
         refresh()
     }
 
-    override fun setIngredientType(type: Type) {
-        this.type = type
-    }
-
     private fun subscribeToData() {
 
-        val flowable = when (type) {
-            is Type.Alcoholic    -> ingredientsUseCase.getAllAlcoholicIngredients()
-            is Type.NonAlcoholic -> ingredientsUseCase.getAllNonAlcoholicIngredients()
+        val flowable = when (ingredientListType) {
+            is IngredientListType.Alcoholic    -> ingredientsUseCase.getAllAlcoholicIngredients()
+            is IngredientListType.NonAlcoholic -> ingredientsUseCase.getAllNonAlcoholicIngredients()
         }
 
         flowable
@@ -46,9 +42,9 @@ class IngredientListPresenter
     //TODO check if internet connection is present?
     override fun refresh() {
 
-        val completable = when (type) {
-            is Type.Alcoholic    -> ingredientsUseCase.refreshAllAlcoholicIngredients()
-            is Type.NonAlcoholic -> ingredientsUseCase.refreshAllNonAlcoholicIngredients()
+        val completable = when (ingredientListType) {
+            is IngredientListType.Alcoholic    -> ingredientsUseCase.refreshAllAlcoholicIngredients()
+            is IngredientListType.NonAlcoholic -> ingredientsUseCase.refreshAllNonAlcoholicIngredients()
         }
 
         completable
@@ -57,5 +53,4 @@ class IngredientListPresenter
             .subscribeWith(getDisposableCompletableObserver({ Timber.i("Refresh sucessfull") }))
             .also { disposables.add(it) }
     }
-
 }

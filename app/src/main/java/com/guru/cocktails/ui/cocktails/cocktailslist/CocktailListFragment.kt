@@ -26,7 +26,7 @@ class CocktailListFragment : BaseFragment(), CocktailsListContract.View {
 
     override fun layoutId() = R.layout.recycler_view
 
-    override fun initializeDependencies() {
+    override fun inject() {
         DaggerViewComponent.builder()
             .applicationComponent(App.instance.appComponent())
             .presenterModule(PresenterModule())

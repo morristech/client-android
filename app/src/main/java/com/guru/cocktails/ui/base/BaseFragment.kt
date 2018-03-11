@@ -17,13 +17,14 @@ abstract class BaseFragment : Fragment() {
     @Inject lateinit var navigator: Navigator
     @Inject lateinit var picasso: Picasso
 
-    open fun initializeDependencies() {}
+    open fun inject() {}
     protected open fun extractArguments() {}
-    @LayoutRes protected abstract fun layoutId(): Int
+    @LayoutRes
+    protected abstract fun layoutId(): Int
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        initializeDependencies()
         extractArguments()
+        inject()
         super.onCreate(savedInstanceState)
     }
 
