@@ -10,7 +10,6 @@ import com.guru.cocktails.platform.extensions.getDisposableCompletableObserver
 import com.guru.cocktails.platform.extensions.getDisposableSubscriber
 import com.guru.cocktails.ui.base.BasePresenterImpl
 import com.guru.cocktails.ui.ingredientdetail.IngredientDetailContract.View
-import com.guru.cocktails.ui.ingredientdetail.IngredientDetailViewState.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -40,8 +39,8 @@ class IngredientDetailPresenter
     override fun refresh() {
         ingredientsUseCase
             .refreshIngredientDetail(ingredientId)
-            .doOnSubscribe { setViewState(Loading()) }
-            .doFinally { setViewState(LoadingFinished()) }
+            .doOnSubscribe { view?.startLoading() }
+            .doFinally { view?.startLoading() }
             .subscribeWith(getDisposableCompletableObserver({ Timber.i("Refresh sucessfull") }))
             .also { disposables.add(it) }
     }
@@ -93,18 +92,15 @@ class IngredientDetailPresenter
     private fun subscribeToData() {
         ingredientsUseCase
             .getIngredientDetail(ingredientId)
-            .subscribeWith(getDisposableSubscriber({ ingredient = it; setViewState(Success(it)) }, { setViewState(Error(it)) }))
+            .subscribeWith(getDisposableSubscriber({ ingredient = it; view?.onNewData(it) }, { view?.onError(it) }))
             .also { disposables.add(it) }
 
         myIngredientsUseCase
             .getMyIngredientById(ingredientId)
-            .subscribeWith(getDisposableSubscriber({ myIngredient = it;setViewState(MyIngredientUpdate(it)) }, { /* Do we care ???*/ }))
+            .subscribeWith(getDisposableSubscriber({ myIngredient = it;view?.myIngredientUpdated(it) }, { /* Do we care ???*/ }))
             .also { disposables.add(it) }
     }
 
-    private fun setViewState(stateDetail: IngredientDetailViewState) {
-        view?.detailViewState = stateDetail
-    }
 
     //todo rewrite (custom getter??)
     private fun getMyIngredient(): MyIngredient {

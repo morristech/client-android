@@ -16,23 +16,17 @@ import com.guru.cocktails.ui.bar.ingredientlist.IngredientListAdapter
 import com.guru.cocktails.ui.base.BaseActivity
 import com.guru.cocktails.ui.description.DescriptionActivity
 import com.guru.cocktails.ui.description.DescriptionViewModel
-import com.guru.cocktails.ui.ingredientdetail.IngredientDetailViewState.*
 import com.guru.cocktails.ui.ingredientdetail.di.DaggerIngredientDetailComponent
 import com.guru.cocktails.ui.ingredientdetail.di.IngredientDetailModule
 import kotlinx.android.synthetic.main.activity_ingredient.*
 import timber.log.Timber
 import javax.inject.Inject
-import kotlin.properties.Delegates
 
 class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
 
     @Inject lateinit var presenter: IngredientDetailContract.Presenter
     private var ingredientId: Int = -1
     private var ingredientDetail: IngredientDetail? = null
-
-    override var detailViewState: IngredientDetailViewState by Delegates.observable<IngredientDetailViewState>(
-        Init(), { _, _, new -> processStateChange(new) }
-    )
 
     override fun layoutId() = R.layout.activity_ingredient
 
@@ -52,6 +46,11 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
             .applicationComponent(App.instance.appComponent())
             .build()
             .inject(this)
+    }
+
+    @Inject
+    override fun attachPresenter(presenter: IngredientDetailContract.Presenter) {
+        this.presenter.attachView(this)
     }
 
     override fun extractArguments() {
@@ -106,46 +105,27 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
         presenter.start()
     }
 
-    @Inject
-    override fun attachPresenter(presenter: IngredientDetailContract.Presenter) {
-        this.presenter.attachView(this)
+    override fun startLoading() {
     }
 
-    private fun processStateChange(new: IngredientDetailViewState) {
-        return when (new) {
-            is Init               -> initialize()
-            is Loading            -> loading()
-            is Success            -> onNewItem(new.item)
-            is Error              -> onError(new.error)
-            is LoadingFinished    -> finishLoading()
-            is MyIngredientUpdate -> onMyIngredientUpdate(new.item)
-        }
+    override fun stopLoading() {
     }
 
-    private fun initialize() {
-    }
-
-    private fun loading() {
-    }
-
-    private fun finishLoading() {
-    }
-
-    private fun onNewItem(item: IngredientDetail) {
+    override fun onNewData(item: IngredientDetail) {
         ingredientDetail = item
         picasso.load(item.imageUrl).into(image)
         collapsing_toolbar.title = item.name
         place_detail.text = item.description
     }
 
-    private fun onMyIngredientUpdate(item: MyIngredient) {
+    override fun myIngredientUpdated(item: MyIngredient) {
         ai_s_my_bar.isChecked = item.myBar
         ai_s_shopping_list.isChecked = item.shoppingCart
     }
 
-    private fun onError(e: Throwable) {
+    override fun onError(error: Throwable) {
         finish()
-        Toast.makeText(this, """Error :$e""", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, """Error :$error""", Toast.LENGTH_LONG).show()
     }
 
     override fun onClick(item: IngredientThumb, sharedElements: List<Pair<View, String>>?) {
