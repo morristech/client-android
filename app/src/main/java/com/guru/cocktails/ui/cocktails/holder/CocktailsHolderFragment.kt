@@ -10,7 +10,7 @@ import com.guru.cocktails.di.module.PresenterModule
 import com.guru.cocktails.ui.bar.ingredientlist.IngredientListFragment
 import com.guru.cocktails.ui.bar.ingredientlist.Type
 import com.guru.cocktails.ui.base.BaseFragment
-import com.guru.cocktails.ui.base.SectionsPagerAdapter
+import com.guru.cocktails.ui.base.view.SectionsPagerAdapter
 import com.guru.cocktails.ui.cocktails.cocktailslist.CocktailListFragment
 import com.guru.cocktails.ui.cocktails.holder.CocktailsHolderContract.Presenter
 import kotlinx.android.synthetic.main.fragment_tabs.*

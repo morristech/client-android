@@ -4,9 +4,6 @@ import com.guru.cocktails.di.scope.ViewScope
 import com.guru.cocktails.domain.interactor.definition.IngredientsUseCase
 import com.guru.cocktails.platform.extensions.getDisposableCompletableObserver
 import com.guru.cocktails.platform.extensions.getDisposableSubscriber
-import com.guru.cocktails.ui.bar.ingredientlist.IngredientListContract.View
-import com.guru.cocktails.ui.bar.ingredientlist.IngredientListViewState.Error
-import com.guru.cocktails.ui.bar.ingredientlist.IngredientListViewState.Success
 import com.guru.cocktails.ui.base.BasePresenterImpl
 import timber.log.Timber
 import javax.inject.Inject
@@ -17,10 +14,10 @@ class IngredientListPresenter
     private val ingredientsUseCase: IngredientsUseCase
 ) : BasePresenterImpl(), IngredientListContract.Presenter {
 
-    private var view: View? = null
+    private var view: IngredientListContract.View? = null
     private lateinit var type: Type
 
-    override fun attachView(view: View) {
+    override fun attachView(view: IngredientListContract.View) {
         this.view = checkNotNull(view)
     }
 
@@ -34,7 +31,7 @@ class IngredientListPresenter
         this.type = type
     }
 
-    override fun subscribeToData() {
+    private fun subscribeToData() {
 
         val flowable = when (type) {
             is Type.Alcoholic    -> ingredientsUseCase.getAllAlcoholicIngredients()
@@ -42,7 +39,7 @@ class IngredientListPresenter
         }
 
         flowable
-            .subscribeWith(getDisposableSubscriber({ setViewState(Success(it)) }, { setViewState(Error(it)) }))
+            .subscribeWith(getDisposableSubscriber({ view?.onNewData(it) }, { view?.onError(it) }))
             .also { disposables.add(it) }
     }
 
@@ -55,14 +52,10 @@ class IngredientListPresenter
         }
 
         completable
-            .doOnSubscribe { setViewState(IngredientListViewState.Loading()) }
-            .doFinally { setViewState(IngredientListViewState.LoadingFinished()) }
+            .doOnSubscribe { view?.startLoading() }
+            .doFinally { view?.stopLoading() }
             .subscribeWith(getDisposableCompletableObserver({ Timber.i("Refresh sucessfull") }))
             .also { disposables.add(it) }
     }
 
-    private fun setViewState(state: IngredientListViewState) {
-        Timber.e(state.toString())
-        view?.viewState = state
-    }
 }

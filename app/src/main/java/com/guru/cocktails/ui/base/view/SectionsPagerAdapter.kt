@@ -1,9 +1,10 @@
-package com.guru.cocktails.ui.base
+package com.guru.cocktails.ui.base.view
 
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import com.guru.cocktails.ui.base.BaseFragment
 import java.util.*
 
 class SectionsPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
