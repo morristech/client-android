@@ -13,12 +13,11 @@ import com.guru.cocktails.domain.model.ingredient.IngredientThumb
 import com.guru.cocktails.platform.extensions.ifAdded
 import com.guru.cocktails.platform.extensions.lazyFast
 import com.guru.cocktails.ui.bar.ingredientlist.IngredientListContract.Presenter
-import com.guru.cocktails.ui.bar.ingredientlist.IngredientListViewState.*
+
 import com.guru.cocktails.ui.base.BaseFragment
 import com.guru.cocktails.ui.ingredientdetail.IngredientDetailActivity
 import kotlinx.android.synthetic.main.recycler_view.*
 import javax.inject.Inject
-import kotlin.properties.Delegates
 
 
 class IngredientListFragment : BaseFragment(), IngredientListContract.View {
@@ -26,9 +25,6 @@ class IngredientListFragment : BaseFragment(), IngredientListContract.View {
     private lateinit var type: Type
     private var presenter: Presenter? = null
     private val adapter by lazyFast { IngredientListAdapter(this, picasso) }
-
-    override var viewState: IngredientListViewState by Delegates.observable<IngredientListViewState>(
-        Init(), { _, _, new -> processStateChange(new) })
 
     override fun layoutId() = R.layout.recycler_view
 
@@ -86,34 +82,20 @@ class IngredientListFragment : BaseFragment(), IngredientListContract.View {
         }
     }
 
-    private fun processStateChange(new: IngredientListViewState) {
-        return when (new) {
-            is Init            -> initialize()
-            is Loading         -> loading()
-            is Success         -> onNewItem(new.item)
-            is Error           -> onError(new.error)
-            is LoadingFinished -> finishLoading()
-        }
-    }
-
-    private fun initialize() {
-    }
-
-    private fun loading() {
+    override fun startLoading() {
         rv_srl.isRefreshing = true
     }
 
-    private fun finishLoading() {
+    override fun stopLoading() {
         rv_srl.isRefreshing = false
     }
 
-    private fun onNewItem(data: List<IngredientThumb>) {
-     //   finishLoading()
-        adapter.updateData(data)
+    override fun onNewData(list: List<IngredientThumb>) {
+        adapter.updateData(list)
     }
 
-    private fun onError(e: Throwable) {
-        ifAdded { Toast.makeText(activity, """Error :$e""", Toast.LENGTH_LONG).show() }
+    override fun onError(error: Throwable) {
+        ifAdded { Toast.makeText(activity, """Error :$error""", Toast.LENGTH_LONG).show() }
     }
 
     companion object {

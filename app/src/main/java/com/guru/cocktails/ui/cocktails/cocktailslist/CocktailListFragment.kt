@@ -13,21 +13,16 @@ import com.guru.cocktails.domain.model.cocktail.CocktailThumb
 import com.guru.cocktails.platform.extensions.ifAdded
 import com.guru.cocktails.platform.extensions.lazyFast
 import com.guru.cocktails.ui.base.BaseFragment
-import com.guru.cocktails.ui.cocktails.cocktailslist.CocktailListViewState.*
 import com.guru.cocktails.ui.cocktails.cocktailslist.CocktailsListContract.Presenter
 import com.guru.cocktails.ui.ingredientdetail.IngredientDetailActivity
 import kotlinx.android.synthetic.main.recycler_view.*
 import javax.inject.Inject
-import kotlin.properties.Delegates
 
 
 class CocktailListFragment : BaseFragment(), CocktailsListContract.View {
 
     private var presenter: Presenter? = null
     private val adapter by lazyFast { CocktailListAdapter(this, picasso) }
-
-    override var viewState: CocktailListViewState by Delegates.observable<CocktailListViewState>(
-        Init(), { _, _, new -> processStateChange(new) })
 
     override fun layoutId() = R.layout.recycler_view
 
@@ -72,33 +67,20 @@ class CocktailListFragment : BaseFragment(), CocktailsListContract.View {
         }
     }
 
-    private fun processStateChange(new: CocktailListViewState) {
-        return when (new) {
-            is Init            -> initialize()
-            is Loading         -> loading()
-            is Success         -> onNewItem(new.item)
-            is Error           -> onError(new.error)
-            is LoadingFinished -> finishLoading()
-        }
+    override fun startLoading() {
+        ifAdded { rv_srl.isRefreshing = true }
     }
 
-    private fun initialize() {
+    override fun stopLoading() {
+        ifAdded { rv_srl.isRefreshing = false }
     }
 
-    private fun loading() {
-        rv_srl.isRefreshing = true
+    override fun onNewData(list: List<CocktailThumb>) {
+        ifAdded { adapter.updateData(list) }
     }
 
-    private fun finishLoading() {
-        rv_srl.isRefreshing = false
-    }
-
-    private fun onNewItem(data: List<CocktailThumb>) {
-        adapter.updateData(data)
-    }
-
-    private fun onError(e: Throwable) {
-        ifAdded { Toast.makeText(activity, """Error :$e""", Toast.LENGTH_LONG).show() }
+    override fun onError(error: Throwable) {
+        ifAdded { Toast.makeText(activity, """Error :$error""", Toast.LENGTH_LONG).show() }
     }
 
     companion object {
