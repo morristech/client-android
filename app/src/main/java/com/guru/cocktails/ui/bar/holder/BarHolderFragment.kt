@@ -11,7 +11,7 @@ import com.guru.cocktails.ui.bar.holder.BarHolderContract.Presenter
 import com.guru.cocktails.ui.bar.ingredientlist.IngredientListFragment
 import com.guru.cocktails.ui.bar.ingredientlist.Type
 import com.guru.cocktails.ui.base.BaseFragment
-import com.guru.cocktails.ui.base.SectionsPagerAdapter
+import com.guru.cocktails.ui.base.view.SectionsPagerAdapter
 import kotlinx.android.synthetic.main.fragment_tabs.*
 import javax.inject.Inject
 

@@ -12,12 +12,12 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_coctail_grid.view.*
 import kotlin.properties.Delegates
 
-abstract class BaseListAdapter<ListItems : BaseListItem>(
-    val callbacks: Callbacks<ListItems>,
+abstract class BaseListAdapter<ListItem : BaseListItem>(
+    val callbacks: Callbacks<ListItem>,
     val picasso: Picasso
-) : RecyclerView.Adapter<BaseListAdapter<ListItems>.ViewHolder>() {
+) : RecyclerView.Adapter<BaseListAdapter<ListItem>.ViewHolder>() {
 
-    private var items: List<ListItems> by Delegates.observable(emptyList()) { _, old, new ->
+    private var items: List<ListItem> by Delegates.observable(emptyList()) { _, old, new ->
         notifyNewData(old, new) { o, n -> o == n }
     }
 
@@ -26,22 +26,21 @@ abstract class BaseListAdapter<ListItems : BaseListItem>(
 
     open fun getListItemLayout() = R.layout.item_coctail_grid
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int)
-            = holder.bindView(items[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bindView(items[position])
 
     override fun getItemCount() = items.size
 
-    fun updateData(newData: List<ListItems>) {
+    fun updateData(newData: List<ListItem>) {
         items = newData
     }
 
-    interface Callbacks<in ListItem:BaseListItem> {
+    interface Callbacks<in ListItem : BaseListItem> {
         fun onClick(item: ListItem, sharedElements: List<Pair<View, String>>?)
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bindView(item: ListItems) {
+        fun bindView(item: ListItem) {
 
             with(itemView) {
                 titleName.text = item.name

@@ -45,14 +45,14 @@ class PresenterModule {
 
     @ViewScope
     @Provides
-    internal fun cocktailsHolderPresenter(ingredientsUseCase: IngredientsUseCase): CocktailsHolderContract.Presenter {
-        return CocktailsHolderPresenter(ingredientsUseCase)
+    internal fun cocktailsHolderPresenter(): CocktailsHolderContract.Presenter {
+        return CocktailsHolderPresenter()
     }
 
     @ViewScope
     @Provides
-    internal fun barHolderPresenter(ingredientsUseCase: IngredientsUseCase): BarHolderContract.Presenter {
-        return BarHolderPresenter(ingredientsUseCase)
+    internal fun barHolderPresenter(): BarHolderContract.Presenter {
+        return BarHolderPresenter()
     }
 
     @ViewScope

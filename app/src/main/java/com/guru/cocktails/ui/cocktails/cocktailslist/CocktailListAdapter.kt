@@ -4,5 +4,7 @@ import com.guru.cocktails.domain.model.cocktail.CocktailThumb
 import com.guru.cocktails.ui.base.BaseListAdapter
 import com.squareup.picasso.Picasso
 
-class CocktailListAdapter(callbacks: Callbacks<CocktailThumb>, picasso: Picasso) :
-        BaseListAdapter<CocktailThumb>(callbacks, picasso)
+class CocktailListAdapter(
+    callbacks: Callbacks<CocktailThumb>,
+    picasso: Picasso
+) : BaseListAdapter<CocktailThumb>(callbacks, picasso)
