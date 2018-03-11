@@ -35,8 +35,8 @@ abstract class BaseActivity : AppCompatActivity(), ConnectivityChecker.Callbacks
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        inject()
         extractArguments()
+        inject()
         setContentView(layoutId())
         afterLayout(savedInstanceState)
         onViewsBound()
