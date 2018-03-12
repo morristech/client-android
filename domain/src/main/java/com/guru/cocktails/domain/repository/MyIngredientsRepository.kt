@@ -10,6 +10,8 @@ interface MyIngredientsRepository {
 
     fun getMyIngredients(): Flowable<List<MyIngredient>>
 
+    fun getShoppingListIngredients(): Flowable<List<MyIngredient>>
+
     fun addMyIngredient(item: MyIngredient): Completable
 
     fun removeMyIngredient(item: MyIngredient): Completable

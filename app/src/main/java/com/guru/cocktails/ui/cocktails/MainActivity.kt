@@ -94,18 +94,21 @@ class MainActivity : BaseActivity() {
     private fun showAcademy() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.am_fl_btn, academyFragment, TAG_INGREDIENTS)
+        transaction.addToBackStack(TAG_INGREDIENTS)
         transaction.commit()
     }
 
     private fun showCocktails() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.am_fl_btn, cocktailsFragment, TAG_COCKTAILS)
+        transaction.addToBackStack(TAG_COCKTAILS)
         transaction.commit()
     }
 
     private fun showBar() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.am_fl_btn, barFragment, TAG_BAR)
+        transaction.addToBackStack(TAG_BAR)
         transaction.commit()
     }
 

@@ -1,4 +1,4 @@
-package com.guru.cocktails.ui.bar.ingredientlist
+package com.guru.cocktails.ui.bar.myingredients
 
 import android.os.Bundle
 import android.support.v4.util.Pair
@@ -7,30 +7,30 @@ import android.view.View
 import android.widget.Toast
 import com.guru.cocktails.App
 import com.guru.cocktails.R
-import com.guru.cocktails.domain.model.ingredient.IngredientThumb
+import com.guru.cocktails.domain.model.ingredient.MyIngredient
 import com.guru.cocktails.platform.extensions.ifAdded
 import com.guru.cocktails.platform.extensions.lazyFast
-import com.guru.cocktails.ui.bar.ingredientlist.IngredientListContract.Presenter
-import com.guru.cocktails.ui.bar.ingredientlist.di.DaggerIngredientListComponent
-import com.guru.cocktails.ui.bar.ingredientlist.di.IngredientListModule
+import com.guru.cocktails.ui.bar.myingredients.MyIngredientListContract.Presenter
+import com.guru.cocktails.ui.bar.myingredients.di.DaggerMyIngredientListComponent
+import com.guru.cocktails.ui.bar.myingredients.di.MyIngredientListModule
 import com.guru.cocktails.ui.base.BaseFragment
 import com.guru.cocktails.ui.ingredientdetail.IngredientDetailActivity
 import kotlinx.android.synthetic.main.recycler_view.*
 import javax.inject.Inject
 
 
-class IngredientListFragment : BaseFragment(), IngredientListContract.View {
+class MyIngredientListFragment : BaseFragment(), MyIngredientListContract.View {
 
-    private lateinit var ingredientListType: IngredientListType
+    private lateinit var myIngredientListType: MyIngredientListType
     @Inject lateinit var presenter: Presenter
-    private val adapter by lazyFast { IngredientListAdapter(this, picasso) }
+    private val adapter by lazyFast { MyIngredientListAdapter(this, picasso) }
 
     override fun layoutId() = R.layout.recycler_view
 
     override fun inject() {
-        DaggerIngredientListComponent.builder()
+        DaggerMyIngredientListComponent.builder()
             .applicationComponent(App.instance.appComponent())
-            .ingredientListModule(IngredientListModule(ingredientListType))
+            .myIngredientListModule(MyIngredientListModule(myIngredientListType))
             .build()
             .inject(this)
     }
@@ -43,9 +43,9 @@ class IngredientListFragment : BaseFragment(), IngredientListContract.View {
     override fun extractArguments() {
         arguments?.let {
             it.getString(ARGS_TYPE)?.let {
-                ingredientListType = when (it) {
-                    TYPE_ALCOHOLIC     -> IngredientListType.Alcoholic()
-                    TYPE_NON_ALCOHOLIC -> IngredientListType.NonAlcoholic()
+                myIngredientListType = when (it) {
+                    TYPE_MY_BAR        -> MyIngredientListType.MyBar()
+                    TYPE_SHOPPING_LIST -> MyIngredientListType.ShoppingList()
                     else               -> throw IllegalStateException("Unknown type passed via bundle : $it")
                 }
             } ?: throw IllegalStateException("Type was not passed in via Bundle")
@@ -57,7 +57,7 @@ class IngredientListFragment : BaseFragment(), IngredientListContract.View {
 
         rv_rv.adapter = adapter
         rv_rv.layoutManager = GridLayoutManager(activity, 2)
-        rv_srl.setOnRefreshListener { presenter.refresh() }
+        rv_srl.isEnabled = false
 
         presenter.start()
     }
@@ -67,27 +67,27 @@ class IngredientListFragment : BaseFragment(), IngredientListContract.View {
         super.onDestroy()
     }
 
-    override fun onClick(item: IngredientThumb, sharedElements: List<Pair<View, String>>?) {
+    override fun onClick(item: MyIngredient, sharedElements: List<Pair<View, String>>?) {
         ifAdded { abc ->
             //TODO picasso.subscribeToData(item.imageUrl).fetch() prefetch large image
             navigator.navigate(
                 source = abc,
                 target = IngredientDetailActivity::class.java,
                 //    sharedElements = sharedElements,
-                bundle = IngredientDetailActivity.createBundle(item.id)
+                bundle = IngredientDetailActivity.createBundle(item.ingredientId)
             )
         }
     }
 
     override fun startLoading() {
-        rv_srl?.isRefreshing = true
+        rv_srl.isRefreshing = true
     }
 
     override fun stopLoading() {
-        rv_srl?.isRefreshing = false
+        rv_srl.isRefreshing = false
     }
 
-    override fun onNewData(list: List<IngredientThumb>) {
+    override fun onNewData(list: List<MyIngredient>) {
         adapter.updateData(list)
     }
 
@@ -97,22 +97,22 @@ class IngredientListFragment : BaseFragment(), IngredientListContract.View {
 
     companion object {
 
-        fun newInstance(bundle: Bundle) = IngredientListFragment().apply {
+        fun newInstance(bundle: Bundle) = MyIngredientListFragment().apply {
             arguments = bundle
         }
 
-        fun createBundle(ingredientListType: IngredientListType) = Bundle().apply {
+        fun createBundle(ingredientListType: MyIngredientListType) = Bundle().apply {
 
             val typeString = when (ingredientListType) {
-                is IngredientListType.Alcoholic    -> TYPE_ALCOHOLIC
-                is IngredientListType.NonAlcoholic -> TYPE_NON_ALCOHOLIC
+                is MyIngredientListType.MyBar        -> TYPE_MY_BAR
+                is MyIngredientListType.ShoppingList -> TYPE_SHOPPING_LIST
             }
 
             putString(ARGS_TYPE, typeString)
         }
 
-        private const val TYPE_ALCOHOLIC = "TYPE_ALCOHOLIC"
-        private const val TYPE_NON_ALCOHOLIC = "TYPE_NON_ALCOHOLIC"
+        private const val TYPE_MY_BAR = "TYPE_MY_BAR"
+        private const val TYPE_SHOPPING_LIST = "TYPE_SHOPPING_LIST"
 
         private const val ARGS_TYPE = "ARGS_TYPE"
     }

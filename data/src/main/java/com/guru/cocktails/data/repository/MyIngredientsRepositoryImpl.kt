@@ -27,6 +27,11 @@ constructor(
             .getMyIngredients()
             .map { myIngredientEntityMapper.map(it) }
 
+    override fun getShoppingListIngredients(): Flowable<List<MyIngredient>> =
+        localSource
+            .getShoppingList()
+            .map { myIngredientEntityMapper.map(it) }
+
     override fun addMyIngredient(item: MyIngredient): Completable =
         myIngredientEntityMapper
             .reverse(item)

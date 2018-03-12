@@ -68,11 +68,11 @@ class CocktailListFragment : BaseFragment(), CocktailsListContract.View {
     }
 
     override fun startLoading() {
-        ifAdded { rv_srl.isRefreshing = true }
+        ifAdded { rv_srl?.isRefreshing = true }
     }
 
     override fun stopLoading() {
-        ifAdded { rv_srl.isRefreshing = false }
+        ifAdded { rv_srl?.isRefreshing = false }
     }
 
     override fun onNewData(list: List<CocktailThumb>) {

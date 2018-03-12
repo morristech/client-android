@@ -39,6 +39,8 @@ constructor(
 
     override fun getMyIngredients(): Flowable<List<MyIngredientEntity>> = db.myIngredientDao().getMyIngredients()
 
+    override fun getShoppingList(): Flowable<List<MyIngredientEntity>> = db.myIngredientDao().getShoppingList()
+
     override fun getMyIngredientById(ingredientId: Int): Flowable<MyIngredientEntity> =
         db.myIngredientDao().getMyIngredientById(ingredientId)
 
