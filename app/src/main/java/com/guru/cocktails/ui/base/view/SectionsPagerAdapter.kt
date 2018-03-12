@@ -20,10 +20,6 @@ class SectionsPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(mana
         return mFragmentList.size
     }
 
-    fun clear() {
-        mFragmentList.clear()
-    }
-
     fun addFragment(fragment: BaseFragment, title: String) {
         mFragmentList.add(fragment)
         mFragmentTitleList.add(title)
