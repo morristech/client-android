@@ -12,6 +12,8 @@ interface LocalSource {
     /* My Ingredients */
     fun getMyIngredients(): Flowable<List<MyIngredientEntity>>
 
+    fun getShoppingList(): Flowable<List<MyIngredientEntity>>
+
     fun getMyIngredientById(ingredientId: Int): Flowable<MyIngredientEntity>
 
     fun addMyIngredient(item: MyIngredientEntity): Completable

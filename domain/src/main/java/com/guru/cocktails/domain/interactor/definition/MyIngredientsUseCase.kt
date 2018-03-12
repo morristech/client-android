@@ -8,6 +8,8 @@ interface MyIngredientsUseCase {
 
     fun getMyIngredients(): Flowable<List<MyIngredient>>
 
+    fun getShoppingListIngredients(): Flowable<List<MyIngredient>>
+
     fun getMyIngredientById(id: Int): Flowable<MyIngredient>
 
     fun addToMyBar(item: MyIngredient): Completable

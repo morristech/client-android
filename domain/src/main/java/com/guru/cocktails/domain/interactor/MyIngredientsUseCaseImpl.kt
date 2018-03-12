@@ -17,15 +17,21 @@ constructor(
     private val repository: MyIngredientsRepository
 ) : MyIngredientsUseCase {
 
-    override fun getMyIngredientById(id: Int): Flowable<MyIngredient> =
-        repository
-            .getMyIngredientById(id)
-            .subscribeOn(schedulerProvider.io())
-            .observeOn(schedulerProvider.ui())
-
     override fun getMyIngredients(): Flowable<List<MyIngredient>> =
         repository
             .getMyIngredients()
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
+
+    override fun getShoppingListIngredients(): Flowable<List<MyIngredient>> =
+        repository
+            .getShoppingListIngredients()
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
+
+    override fun getMyIngredientById(id: Int): Flowable<MyIngredient> =
+        repository
+            .getMyIngredientById(id)
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
 

@@ -19,6 +19,11 @@ open class BaseHolderFragment : BaseFragment() {
         App.instance.appComponent()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        addFragments()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initialize()
@@ -30,7 +35,6 @@ open class BaseHolderFragment : BaseFragment() {
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
-        addFragments()
         viewPager.adapter = adapter
     }
 
