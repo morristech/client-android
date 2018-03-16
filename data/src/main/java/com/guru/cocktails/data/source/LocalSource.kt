@@ -1,9 +1,6 @@
 package com.guru.cocktails.data.source
 
-import com.guru.cocktails.data.source.local.model.CocktailThumbEntity
-import com.guru.cocktails.data.source.local.model.IngredientDetailEntity
-import com.guru.cocktails.data.source.local.model.IngredientThumbEntity
-import com.guru.cocktails.data.source.local.model.MyIngredientEntity
+import com.guru.cocktails.data.source.local.model.*
 import io.reactivex.Completable
 import io.reactivex.Flowable
 
@@ -35,4 +32,17 @@ interface LocalSource {
     fun getCocktailsList(): Flowable<List<CocktailThumbEntity>>
 
     fun saveCocktailsList(list: List<CocktailThumbEntity>): Completable
+
+    fun getCocktailDetail(id: Int): Flowable<CocktailDetailBundleEntity>
+
+    fun saveCocktailDetail(item: CocktailDetailEntity): Completable
+
+    /* Various */
+    fun getCocktailGlassDetail(id: Int): Flowable<CocktailGlassEntity>
+
+    fun saveCocktailGlassDetail(item: CocktailGlassEntity): Completable
+
+    fun getCocktailMethodDetail(id: Int): Flowable<CocktailMethodEntity>
+
+    fun saveCocktailMethodDetail(item: CocktailMethodEntity): Completable
 }

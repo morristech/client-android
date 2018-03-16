@@ -1,10 +1,7 @@
 package com.guru.cocktails.data.source.local
 
 import com.guru.cocktails.data.source.LocalSource
-import com.guru.cocktails.data.source.local.model.CocktailThumbEntity
-import com.guru.cocktails.data.source.local.model.IngredientDetailEntity
-import com.guru.cocktails.data.source.local.model.IngredientThumbEntity
-import com.guru.cocktails.data.source.local.model.MyIngredientEntity
+import com.guru.cocktails.data.source.local.model.*
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import javax.inject.Inject
@@ -50,5 +47,23 @@ constructor(
 
     override fun deleteMyIngredient(item: MyIngredientEntity): Completable = Completable.fromCallable {
         db.myIngredientDao().delete(item)
+    }
+
+    override fun getCocktailDetail(id: Int): Flowable<CocktailDetailBundleEntity> = db.cocktailDetailBundleDao().getById(id)
+
+    override fun saveCocktailDetail(item: CocktailDetailEntity): Completable = Completable.fromCallable {
+        db.cocktailDetailDao().insert(item)
+    }
+
+    override fun getCocktailGlassDetail(id: Int): Flowable<CocktailGlassEntity> = db.cocktailGlassDao().getById(id)
+
+    override fun saveCocktailGlassDetail(item: CocktailGlassEntity): Completable = Completable.fromCallable {
+        db.cocktailGlassDao().insert(item)
+    }
+
+    override fun getCocktailMethodDetail(id: Int): Flowable<CocktailMethodEntity> = db.cocktailMethodDao().getById(id)
+
+    override fun saveCocktailMethodDetail(item: CocktailMethodEntity): Completable = Completable.fromCallable {
+        db.cocktailMethodDao().insert(item)
     }
 }
