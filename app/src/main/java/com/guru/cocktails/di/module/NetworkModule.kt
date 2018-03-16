@@ -140,4 +140,8 @@ class NetworkModule {
         val cacheSize = 150L * 1024 * 1024  //150 MB
         return Cache(context.cacheDir, cacheSize)
     }
+
+    @Provides
+    @Singleton
+    internal fun provideGson(): Gson = Gson()
 }

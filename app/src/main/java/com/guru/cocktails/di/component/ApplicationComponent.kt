@@ -1,6 +1,7 @@
 package com.guru.cocktails.di.component
 
 import android.content.Context
+import com.google.gson.Gson
 import com.guru.cocktails.di.module.*
 import com.guru.cocktails.domain.executor.SchedulerProvider
 import com.guru.cocktails.domain.interactor.definition.CocktailsUseCase
@@ -44,6 +45,7 @@ interface ApplicationComponent {
     fun eventBus(): EventBus
     fun picasso(): Picasso
     fun dataBus(): DataBus
+    fun gson(): Gson
     fun analyticsManager(): AnalyticsManager
     fun ingredientsUseCase(): IngredientsUseCase
     fun myIngredientsUseCase(): MyIngredientsUseCase
