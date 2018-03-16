@@ -1,5 +1,6 @@
 package com.guru.cocktails.data.source.remote
 
+import com.guru.cocktails.data.source.remote.model.cocktail.CocktailDetailBundleDto
 import com.guru.cocktails.data.source.remote.model.cocktail.CocktailThumbDto
 import com.guru.cocktails.data.source.remote.model.ingredient.IngredientDetailBundleDto
 import com.guru.cocktails.data.source.remote.model.ingredient.IngredientThumbDto
@@ -10,6 +11,9 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface CocktailsApiClient {
+
+    @GET("/cocktail/detail")
+    fun getCocktailDetail(@Query("id") id: Int): Single<CocktailDetailBundleDto>
 
     @GET("/cocktail/list")
     fun getCocktailsList(
