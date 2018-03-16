@@ -24,7 +24,7 @@ abstract class BaseListAdapter<ListItem : BaseListItem>(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(parent.inflate(getListItemLayout()))
 
-    open fun getListItemLayout() = R.layout.item_coctail_grid
+    open fun getListItemLayout() = R.layout.item_cocktail_grid
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bindView(items[position])
 
@@ -43,8 +43,8 @@ abstract class BaseListAdapter<ListItem : BaseListItem>(
         fun bindView(item: ListItem) {
 
             with(itemView) {
-                titleName.text = item.name
-                picasso.load(item.imageUrl).into(image)
+                grid_item_tv_title.text = item.name
+                picasso.load(item.imageUrl).into(grid_item_image)
                 //   val pairs = listOf(Pair(image as View, "image"))
                 setOnClickListener { callbacks.onClick(item, null) }
             }
