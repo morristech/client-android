@@ -43,8 +43,8 @@ abstract class BaseListAdapter<ListItem : BaseListItem>(
         fun bindView(item: ListItem) {
 
             with(itemView) {
-                tv_grid_item_title.text = item.name
-                picasso.load(item.imageUrl).into(image_grid_item)
+                grid_item_tv_title.text = item.name
+                picasso.load(item.imageUrl).into(grid_item_image)
                 //   val pairs = listOf(Pair(image as View, "image"))
                 setOnClickListener { callbacks.onClick(item, null) }
             }
