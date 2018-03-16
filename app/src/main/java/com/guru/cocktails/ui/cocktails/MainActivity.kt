@@ -1,7 +1,6 @@
 package com.guru.cocktails.ui.cocktails
 
 import android.os.Bundle
-import android.support.design.widget.CoordinatorLayout
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.guru.cocktails.App
@@ -10,7 +9,6 @@ import com.guru.cocktails.platform.extensions.lazyFast
 import com.guru.cocktails.ui.academy.holder.AcademyHolderFragment
 import com.guru.cocktails.ui.bar.holder.BarHolderFragment
 import com.guru.cocktails.ui.base.BaseActivity
-import com.guru.cocktails.ui.base.view.BottomNavigationViewBehavior
 import com.guru.cocktails.ui.cocktails.holder.CocktailsHolderFragment
 import com.guru.cocktails.ui.shared.DrawerItems
 import com.guru.cocktails.ui.shared.DrawerManager
@@ -53,8 +51,6 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setUpBottomNavigation() {
-        val layoutParams = navigation.layoutParams as CoordinatorLayout.LayoutParams
-        layoutParams.behavior = BottomNavigationViewBehavior(BOTTOM_NAVIGATION_ANIMATION_LENGTH)
 
         // Create items
         val item1 = AHBottomNavigationItem(R.string.menu_item_cocktails, R.drawable.ic_cocktail_black_24dp, R.color.md_blue_600)
