@@ -17,6 +17,8 @@ data class CocktailDetailEntity(
     val imageName: String,
     val glassId: Int,
     val methodId: Int,
+    val methodName: String,
+    val methodDescription: String,
     val ingredientList: String,
     val similarCocktailList: String,
     val numOfFavorite: Long,

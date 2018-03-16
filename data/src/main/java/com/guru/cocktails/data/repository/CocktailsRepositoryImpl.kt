@@ -2,7 +2,10 @@ package com.guru.cocktails.data.repository
 
 import com.guru.cocktails.data.source.LocalSource
 import com.guru.cocktails.data.source.RemoteSource
-import com.guru.cocktails.data.source.local.mapper.*
+import com.guru.cocktails.data.source.local.mapper.CocktailDetailBundleEntityMapper
+import com.guru.cocktails.data.source.local.mapper.CocktailDetailEntityMapper
+import com.guru.cocktails.data.source.local.mapper.CocktailGlassEntityMapper
+import com.guru.cocktails.data.source.local.mapper.CocktailThumbEntityMapper
 import com.guru.cocktails.data.source.remote.mapper.cocktail.CocktailDetailBundleMapper
 import com.guru.cocktails.data.source.remote.mapper.cocktail.CocktailThumbMapper
 import com.guru.cocktails.domain.model.cocktail.CocktailDetailBundle
@@ -24,7 +27,6 @@ constructor(
     private val cocktailDetailBundleMapper: CocktailDetailBundleMapper,
     private val cocktailDetailEntityMapper: CocktailDetailEntityMapper,
     private val cocktailGlassEntityMapper: CocktailGlassEntityMapper,
-    private val cocktailMethodEntityMapper: CocktailMethodEntityMapper,
     private val cocktailDetailBundleEntityMapper: CocktailDetailBundleEntityMapper
 ) : CocktailsRepository {
 
@@ -54,11 +56,9 @@ constructor(
     override fun saveCocktailDetail(item: CocktailDetailBundle): Completable {
         val cocktailEntity = cocktailDetailEntityMapper.reverse(item.cocktail)
         val glassEntity = cocktailGlassEntityMapper.reverse(item.cocktail.glass)
-        val methodEntity = cocktailMethodEntityMapper.reverse(item.cocktail.method)
         return localSource
             .saveCocktailDetail(cocktailEntity)
             .andThen(localSource.saveCocktailGlassDetail(glassEntity))
-            .andThen(localSource.saveCocktailMethodDetail(methodEntity))
     }
 
     override fun refreshCocktailDetail(id: Int): Completable {

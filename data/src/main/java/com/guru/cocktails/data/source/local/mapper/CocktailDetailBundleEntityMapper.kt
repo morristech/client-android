@@ -9,15 +9,13 @@ import javax.inject.Singleton
 class CocktailDetailBundleEntityMapper
 @Inject constructor(
     private val cocktailDetailEntityMapper: CocktailDetailEntityMapper,
-    private val cocktailGlassEntityMapper: CocktailGlassEntityMapper,
-    private val cocktailMethodEntityMapper: CocktailMethodEntityMapper
+    private val cocktailGlassEntityMapper: CocktailGlassEntityMapper
 ) {
 
     fun map(from: CocktailDetailBundleEntity) = with(from) {
         CocktailDetailBundle(
             cocktail = cocktailDetailEntityMapper.map(cocktail!!)
                 .copy(glass = cocktailGlassEntityMapper.map(glass.first()))
-                .copy(method = cocktailMethodEntityMapper.map(method.first()))
         )
     }
 }
