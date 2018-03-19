@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_l"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:id="@+id/image_one"
+            android:layout_width="@dimen/space_xxl"
+            android:layout_height="@dimen/space_xxl"
+            android:tint="#0f4a84"
+            app:srcCompat="@drawable/ic_hexagon"
+            />
+
+        <TextView
+            android:id="@+id/info_text_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/padding_l"
+            android:textColor="?attr/colorAccent"
+            android:textSize="@dimen/text_xs_12"
+            tools:text="Rit"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:id="@+id/image_two"
+            android:layout_width="@dimen/space_xxl"
+            android:layout_height="@dimen/space_xxl"
+            android:tint="#4d92d7"
+            app:srcCompat="@drawable/ic_hexagon"
+            />
+
+        <TextView
+            android:id="@+id/info_text_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/padding_l"
+            android:textColor="?attr/colorAccent"
+            android:textSize="@dimen/text_xs_12"
+            tools:text="Cocktails"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:id="@+id/image_three"
+            android:layout_width="@dimen/space_xxl"
+            android:layout_height="@dimen/space_xxl"
+            android:tint="#d989d2"
+            app:srcCompat="@drawable/ic_hexagon"
+            />
+
+        <TextView
+            android:id="@+id/info_text_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/padding_l"
+            android:textColor="?attr/colorAccent"
+            android:textSize="@dimen/text_xs_12"
+            tools:text="Alcohol"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:id="@+id/image_four"
+            android:layout_width="@dimen/space_xxl"
+            android:layout_height="@dimen/space_xxl"
+            android:tint="#2d0a06"
+            app:srcCompat="@drawable/ic_hexagon"
+            />
+
+        <TextView
+            android:id="@+id/info_text_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/padding_l"
+            android:textColor="?attr/colorAccent"
+            android:textSize="@dimen/text_xs_12"
+            tools:text="hovno"
+            />
+    </LinearLayout>
+</merge>
