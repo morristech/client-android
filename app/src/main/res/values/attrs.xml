@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DetailInfoView">
+        <attr name="srcIconOne" />
+        <attr name="srcIconTwo" />
+        <attr name="srcIconThree" />
+        <attr name="srcIconFour" />
+        <attr name="infoTextOne" format="string" />
+        <attr name="infoTextTwo" format="string" />
+        <attr name="infoTextThree" format="string" />
+        <attr name="infoTextFour" format="string" />
+    </declare-styleable>
+</resources>
