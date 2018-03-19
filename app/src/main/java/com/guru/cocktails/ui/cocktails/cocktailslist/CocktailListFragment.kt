@@ -14,7 +14,7 @@ import com.guru.cocktails.platform.extensions.ifAdded
 import com.guru.cocktails.platform.extensions.lazyFast
 import com.guru.cocktails.ui.base.BaseFragment
 import com.guru.cocktails.ui.cocktails.cocktailslist.CocktailsListContract.Presenter
-import com.guru.cocktails.ui.ingredientdetail.IngredientDetailActivity
+import com.guru.cocktails.ui.cocktails.detail.CocktailDetailActivity
 import kotlinx.android.synthetic.main.recycler_view.*
 import javax.inject.Inject
 
@@ -60,9 +60,9 @@ class CocktailListFragment : BaseFragment(), CocktailsListContract.View {
             //TODO picasso.subscribeToData(item.imageUrl).fetch() prefetch large image
             navigator.navigate(
                 source = abc,
-                target = IngredientDetailActivity::class.java,
+                target = CocktailDetailActivity::class.java,
                 //    sharedElements = sharedElements,
-                bundle = IngredientDetailActivity.createBundle(item.id)
+                bundle = CocktailDetailActivity.createBundle(item.id)
             )
         }
     }
