@@ -10,4 +10,8 @@
         <attr name="infoTextThree" format="string" />
         <attr name="infoTextFour" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="CocktailCheckButton">
+        <attr name="switchRightText" format="string" />
+    </declare-styleable>
 </resources>

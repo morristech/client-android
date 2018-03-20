@@ -88,19 +88,19 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
 
         ai_ll_description.setOnClickListener { navigateToDescriptionDetail() }
 
-        ai_s_my_bar.setOnCheckedChangeListener({ _, checked ->
-            when (checked) {
-                true  -> presenter.addToMyBar()
+        cocktail_check_my_bar.setOnClickListener {
+            when (cocktail_check_my_bar.isChecked) {
+                true -> presenter.addToMyBar()
                 false -> presenter.removeFromMyBar()
             }
-        })
+        }
 
-        ai_s_shopping_list.setOnCheckedChangeListener({ _, checked ->
-            when (checked) {
-                true  -> presenter.addToShoppingList()
+        cocktail_check_shopping_list.setOnClickListener {
+            when (cocktail_check_shopping_list.isChecked) {
+                true -> presenter.addToShoppingList()
                 false -> presenter.removeFromShoppingList()
             }
-        })
+        }
 
         presenter.start()
     }
@@ -119,8 +119,8 @@ class IngredientDetailActivity : BaseActivity(), IngredientDetailContract.View {
     }
 
     override fun myIngredientUpdated(item: MyIngredient) {
-        ai_s_my_bar.isChecked = item.myBar
-        ai_s_shopping_list.isChecked = item.shoppingCart
+        cocktail_check_my_bar.isChecked = item.myBar
+        cocktail_check_shopping_list.isChecked = item.shoppingCart
     }
 
     override fun onError(error: Throwable) {

@@ -93,52 +93,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:padding="@dimen/space_s"
                 >
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <com.guru.cocktails.ui.shared.CocktailCheckButton
+                    android:id="@+id/cocktail_check_my_bar"
+                    android:layout_width="@dimen/space_zero"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    >
+                    app:switchRightText="My bar"
+                    />
 
-                    <android.support.v7.widget.SwitchCompat
-                        android:id="@+id/ai_s_my_bar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="My bar"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <com.guru.cocktails.ui.shared.CocktailCheckButton
+                    android:id="@+id/cocktail_check_shopping_list"
+                    android:layout_width="@dimen/space_zero"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    >
-
-                    <android.support.v7.widget.SwitchCompat
-                        android:id="@+id/ai_s_shopping_list"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Shopping list"
-                        />
-                </LinearLayout>
+                    app:switchRightText="Shopping list"
+                    />
             </LinearLayout>
 
             <View
